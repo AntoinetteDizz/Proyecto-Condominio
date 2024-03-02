@@ -11,7 +11,7 @@ class RoleType(models.Model):
 class Users(models.Model):
   name= models.CharField(max_length=50)
   email= models.CharField(max_length=100)
-  password= models.CharField(max_length=40)
+  pasword= models.CharField(max_length=40)
   acess= models.ForeignKey(RoleType, on_delete=models.CASCADE)
   
   class Meta:
