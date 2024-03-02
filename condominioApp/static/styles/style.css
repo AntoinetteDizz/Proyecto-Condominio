@@ -2,7 +2,70 @@ body {
   font-family: 'Montserrat';
   background: linear-gradient(90deg, rgba(77, 67, 255, 0.15730042016806722) 0%, rgba(158, 223, 255, 1) 100%);
   margin: 0;
-  padding: 20px;
+  
+}
+
+body nav{
+  font-family: 'Roboto', sans-serif;
+}
+
+header{
+    
+    
+  display: flex;
+  min-height: 70px;
+  background: linear-gradient(90deg, rgba(77, 67, 255, 0.15730042016806722) 0%, rgba(158, 223, 255, 1) 100%);
+  opacity: .9;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+ 
+ 
+}
+.nombre-pag{
+  font-family:'Ubuntu', sans-serif;
+  color: #040404;
+}
+
+.logo{
+  display: flex;
+  align-items: center;
+}
+
+.logo img{
+  height: 50px;
+  margin-right: 10px;
+}
+nav{
+  
+  font-family: 'Roboto', sans-serif;
+  z-index: 50;
+}
+.nav-link{
+  font-family: 'Roboto', sans-serif;
+}
+
+nav a{
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  padding-right: 10px;;
+}
+
+nav a:hover{
+  color: rgb(255, 255, 255);
+}
+
+@media (max-width:700px){
+  header{
+      flex-direction: column;
+  }
+
+  nav{
+      padding: 10px 0px;
+  }
+
+
 }
 
 .imagen-usuario {
@@ -59,12 +122,27 @@ button {
 }
 
 a {
-  background-color: #000;
+  
   margin-top: 20px;
+  background-color: #fff;
   display: block;
   text-align: center;
-  text-decoration: none;
-  color: #ffffff;
-  padding: 10px;
   transition: .5s;
+  text-decoration: none; /* Elimina el subrayado predeterminado */
+    color: #3366cc; /* Cambia el color del texto */
+    font-weight: bold; /* Hace que el texto sea más grueso */
+    font-family: Arial, sans-serif; /* Cambia la fuente del texto */
+    padding: 10px 20px; /* Añade espaciado interno */
+    border: 2px solid #3366cc; /* Añade un borde sólido */
+    border-radius: 5px; /* Hace que los bordes sean redondeados */
+    transition: all 0.3s ease; /* Agrega una transición suave */
 }
+
+a:hover {
+  background-color: #3366cc; /* Cambia el color de fondo al pasar el cursor */
+  color: #fff; /* Cambia el color del texto al pasar el cursor */
+}
+
+
+
+
