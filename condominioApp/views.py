@@ -27,6 +27,6 @@ def admin(request):
 
 
 def create_condominium(request):
-  return render(request, 'create.html')
+  return render(request, 'create_condominium.html')
   
   
