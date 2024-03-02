@@ -6,18 +6,19 @@ class RoleType(models.Model):
   
   class Meta:
         db_table = 'RoleType'
-
+        
+  
 
 class Condominio(models.Model):
     name = models.CharField(max_length=80)
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
-    number_of_dwellings=models.PositiveIntegerField() #Candidad de casas o departamentos que hay en el condominio
-    year_of_construction = models.PositiveIntegerField()
-    condo_status=models.CharField(max_length=80) # Para saber si el condominio le pertenece a alguien o no
+    year_construction = models.CharField(max_length=30)
+    number_of_dwellings=models.PositiveIntegerField() #Cantidad de casas o departamentos que hay en el condominio
 
     class Meta:
         db_table = 'Condominios'
+
 
 class Directivo(models.Model):
     name= models.CharField(max_length=50)

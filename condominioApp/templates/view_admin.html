@@ -7,18 +7,18 @@
 <!-- aqui va la nav del admin -->
 
 <header>
-    <a href= "" class="logo">
-        <img src="{% static 'img/view_admin.png' %}" alt="Imagen Administrador" >
+    <a href="" class="logo">
+        <img src="{% static 'img/view_admin.png' %}" alt="Imagen Administrador">
         <h2 class="nombre-pag">USUARIO ADMINISTRADOR</h2>
     </a>
     <nav>
 
-    <!--Formulario que contiene la redireccion al chat global de la página-->
+        <!--Formulario que contiene la redireccion al chat global de la página-->
         <!--<a href="about_us.php" class="nav-link">Sobre Nosotros</a>-->
         <!--<a href="" class="nav-link">Regresar</a>-->
-        <a href="/create_condominium/">Crear Condominio</a>
+        <a href="{% url 'create_condominium'%}">Crear Condominio</a>
         <a href="" class="nav-link">Cerrar Sesion</a>
-       
+
     </nav>
 </header>
 <h1>Hola Administrador</h1>
