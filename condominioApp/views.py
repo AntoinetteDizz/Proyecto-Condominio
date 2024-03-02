@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models  import Users, RoleType
 # Create your views here.
 
@@ -14,13 +14,19 @@ def index(request):
     users = Users.objects.filter(email=email)
     
     #Acceso a la vista del usuario admin
-
     for user in users:
       if user.email == email and user.pasword == password and user.acess_id == 1:
-        return render(request, 'view_admin.html')
+        return redirect('view_admin/')
     
     return render(request, 'login.html')
   
   
+# vista del admin
+def admin(request):
+  return render(request, 'view_admin.html')
+
+
+def create_condominium(request):
+  return render(request, 'create.html')
   
   
