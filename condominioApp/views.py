@@ -15,7 +15,7 @@ def index(request):
     
     #Acceso a la vista del usuario admin
     for user in users:
-      if user.email == email and user.pasword == password and user.acess_id == 1:
+      if user.email == email and user.password == password and user.acess_id == 1:
         return redirect('view_admin/')
     
     return render(request, 'login.html')
