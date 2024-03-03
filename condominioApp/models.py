@@ -51,9 +51,10 @@ class Empleado(models.Model):
   charge = models.CharField(max_length=100)
   salary = models.DecimalField(max_digits=10, decimal_places=2)
   phone_number = models.CharField(max_length=20)
+  condominio = models.ForeignKey(Condominio, on_delete=models.CASCADE)
   
   def __str__(self):
-    return f"[id]: {self.pk} --- [name]:{self.name} --- [lastname]:{self.lastname} --- [age]:{self.age} --- [gender]:{self.gender} --- [email]:{self.email} --- [charge]:{self.charge} --- [salary]:{self.salary} --- [phone]:{self.phone_numer}"
+    return f"[id]: {self.pk} --- [name]:{self.name} --- [lastname]:{self.lastname} --- [age]:{self.age} --- [gender]:{self.gender} --- [email]:{self.email} --- [charge]:{self.charge} --- [salary]:{self.salary} --- [phone]:{self.phone_numer} --- [condominio_name]: {self.condominio.name}  --- [condominio_adress]:{self.condominio.address} --- [condominio_city]:{self.condominio.city}"
 
   class Meta:
         db_table='Empleados'

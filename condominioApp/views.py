@@ -116,3 +116,27 @@ def update_owner(request):
 
         return redirect('/view_admin/')
 
+
+def create_employee(request):
+  if request.method == 'GET':
+    
+    condominios = Condominio.objects.all()
+    context = {'condominios': condominios}
+    return render(request, 'create_employee.html', context)
+  else:
+    name = request.POST['name']
+    lastname = request.POST['lastname']
+    age = request.POST['age']
+    gender = request.POST['gender']
+    email = request.POST['email']
+    charge = request.POST['charge']
+    salary = request.POST['salary']
+    phone = request.POST['phone']
+    condominio = request.POST['condominio']
+    
+    # Obtener la instancia de Condominio correspondiente al ID proporcionado
+    # condominio = get_object_or_404(Condominio, pk=condominio_id)
+        
+    Empleado.objects.create(name = name, lastname =lastname , age = age, gender = gender, email = email, charge =  charge, salary =  salary, phone_number =  phone, condominio_id = condominio)
+
+    return redirect('/view_admin/')
