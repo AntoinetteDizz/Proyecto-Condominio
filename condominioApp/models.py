@@ -22,7 +22,7 @@ class Condominio(models.Model):
 
 class Directivo(models.Model):
     name= models.CharField(max_length=50)
-    email= models.CharField(max_length=100)
+    email = models.CharField(max_length=100,unique=True)
     password= models.CharField(max_length=40)
     acess= models.ForeignKey(RoleType, on_delete=models.CASCADE)
     class Meta:
@@ -34,7 +34,7 @@ class Empleado(models.Model):
   lastname= models.CharField(max_length=50)
   age=models.PositiveBigIntegerField()
   gender = models.CharField(max_length=10)
-  email = models.CharField(max_length=100)
+  email = models.CharField(max_length=100,unique=True)
   charge = models.CharField(max_length=100)
   salary = models.DecimalField(max_digits=10, decimal_places=2)
   phone_number = models.CharField(max_length=20)
@@ -45,7 +45,7 @@ class Empleado(models.Model):
 # Create your models here.
 class Users(models.Model):
   name= models.CharField(max_length=50)
-  email= models.CharField(max_length=100)
+  email = models.CharField(max_length=100,unique=True)
   password= models.CharField(max_length=40)
   acess= models.ForeignKey(RoleType, on_delete=models.CASCADE)
   condominio = models.ForeignKey(Condominio, on_delete=models.CASCADE)
