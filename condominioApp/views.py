@@ -68,3 +68,6 @@ def update_condominium(request):
         condominio.save()
 
         return redirect('/view_admin/')
+    
+def create_owner(request):
+   return render(request, 'create_owner.html')
