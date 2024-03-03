@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from .models  import *
 # Create your views here.
 
@@ -55,7 +55,7 @@ def update_condominium(request):
         dwellings = request.POST['dwellings']
         year =  request.POST['year']
         
-        # Aquí necesitas obtener el ID del condominio seleccionado del formulario
+        #obtener el ID del condominio seleccionado del formulario
         condominio_id = request.POST['condominio']
         
         # Actualizar el condominio seleccionado usando su ID
@@ -69,7 +69,9 @@ def update_condominium(request):
 
         return redirect('/view_admin/')
     
+
 def create_owner(request):
+    
     if request.method == 'GET':
         condominios = Condominio.objects.all()
         context = {'condominios': condominios}
@@ -77,9 +79,40 @@ def create_owner(request):
     else:
         name = request.POST['name']
         email = request.POST['email']
+        password= request.POST['password']
         condominio_id = request.POST['condominio']
         acess_id = request.POST['acceso']
 
-        Users.objects.create(name=name, email=email, acess_id=acess_id, condominio_id=condominio_id)
+        Users.objects.create(name=name, email=email,password = password  ,acess_id=acess_id, condominio_id=condominio_id)
         
         return redirect('/view_admin/')
+
+def update_owner(request):
+    if request.method == 'GET':
+        # Consulta a la tabla Users para obtener todos los registros
+        owner = Users.objects.all()
+        # Consulta a la tabla Condomios para obtener todos los registros
+        condominios = Condominio.objects.all()
+        # Pasar los datos al contexto de renderizado
+        context = {'usuarios': owner, 'condominios': condominios}
+        return render(request, 'update_owner.html', context)
+    else:
+        name = request.POST['name']
+        email = request.POST['email']
+        password = request.POST['password']
+        id_user = request.POST['usuario']
+        condominio_id = request.POST['condominio']
+
+        # Obtener la instancia de Condominio correspondiente al ID proporcionado
+        condominio = get_object_or_404(Condominio, pk=condominio_id)
+
+        # Actualizar el usuario seleccionado usando su ID
+        user = Users.objects.get(pk=id_user)
+        user.name = name
+        user.email = email
+        user.password = password
+        user.condominio = condominio
+        user.save()
+
+        return redirect('/view_admin/')
+
