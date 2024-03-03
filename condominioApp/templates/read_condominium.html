@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+ <!-- CREAR LA PANTILLA DE LA TABLA -->
+ 
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Dirección</th>
+        <th>Ciudad</th>
+        <th>Número de Viviendas</th>
+        <th>Año de Construcción</th>
+    </tr>
+    {% for condominio in condominios %}
+    <tr>
+        <td>{{ condominio.name }}</td>
+        <td>{{ condominio.address }}</td>
+        <td>{{ condominio.city }}</td>
+        <td>{{ condominio.number_of_houses }}</td>
+        <td>{{ condominio.year_of_construction }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

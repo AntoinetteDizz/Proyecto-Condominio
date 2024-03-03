@@ -25,6 +25,16 @@ def index(request):
 def admin(request):
   return render(request, 'view_admin.html')
 
+def read_condominium(request):
+  if request.method == 'GET':
+      # Consulta a la tabla Codominio para obtener todos los registros
+      condominios = Condominio.objects.all()
+
+      # Pasar los datos al contexto de renderizado
+      context = {'condominios': condominios}
+
+      return render(request,'read_condominium.html',context)
+
 
 def create_condominium(request):
   if request.method == 'GET':

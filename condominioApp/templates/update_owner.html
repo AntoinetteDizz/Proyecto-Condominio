@@ -9,7 +9,7 @@
     
   {% csrf_token %} <!-- Agregar el token CSRF aquí -->
 
-  <label for="Usuario">Seleccionar el Condominio que le pertenece:</label>
+  <label for="Usuario">Seleccionar el usuario a Modificar:</label>
   <select name="usuario" id="usuario">
     {% for usuario in usuarios %}
     <option value="{{ usuario.id }}">{{ usuario.name }} - {{ usuario.email }}</option>
