@@ -78,7 +78,32 @@ def update_condominium(request):
         condominio.save()
 
         return redirect('/view_admin/')
-    
+
+def delete_condominium(request):
+  if request.method == 'GET':
+      condominios = Condominio.objects.all()
+
+      # Pasar los datos al contexto de renderizado
+      context = {'condominios': condominios}
+
+      return render(request, 'delete_condominium.html', context)
+  else:
+     
+     condominio_id = request.POST['condominio']
+
+     condominio = get_object_or_404(Condominio, pk=condominio_id)
+
+      # Eliminar el condominio
+     condominio.delete()
+     
+     return redirect('/view_admin/')
+
+
+
+
+
+
+
 
 def create_owner(request):
     
