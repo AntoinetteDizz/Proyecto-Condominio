@@ -70,4 +70,16 @@ def update_condominium(request):
         return redirect('/view_admin/')
     
 def create_owner(request):
-   return render(request, 'create_owner.html')
+    if request.method == 'GET':
+        condominios = Condominio.objects.all()
+        context = {'condominios': condominios}
+        return render(request, 'create_owner.html', context)
+    else:
+        name = request.POST['name']
+        email = request.POST['email']
+        condominio_id = request.POST['condominio']
+        acess_id = request.POST['acceso']
+
+        Users.objects.create(name=name, email=email, acess_id=acess_id, condominio_id=condominio_id)
+        
+        return redirect('/view_admin/')

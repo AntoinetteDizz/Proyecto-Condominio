@@ -1,22 +1,29 @@
 {% extends 'layouts/base.html'%}
 {% load static %}
 
-{%block content%}
+{% block content %}
 <h2>Registro de Usuario</h2>
 
-    <form action="" method="post">
-        <label for="nombre">Nombre:</label>
-        <input type="text" id="nombre" name="nombre" required>
+<form action="" method="post">
+  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
 
-        <label for="correo">Correo Electrónico:</label>
-        <input type="email" id="correo" name="correo" required>
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="name" name="name" required>
 
-        <label for="contrasena">Contraseña:</label>
-        <input type="password" id="contrasena" name="contrasena" required>
+  <label for="correo">Correo Electrónico:</label>
+  <input type="email" id="email" name="email" required>
 
-        <label for="condominio">Condominio:</label>
-        <input type="text" id="condominio" name="condominio" required>
+  <label for="contrasena">Contraseña:</label>
+  <input type="password" id="contrasena" name="password" required>
 
-        <button type="submit">Registrar</button>
-    </form>
-{%endblock%}
+  <label for="condominio">Seleccionar el Condominio que le pertenece:</label>
+  <select name="condominio" id="condominio">
+    {% for condominio in condominios %}
+    <option value="{{ condominio.id }}">{{ condominio.name }} - {{ condominio.address }}</option>
+    {% endfor %}
+  </select>
+
+  <input type="hidden" value="2" id="acceso" name="acceso" >
+  <button type="submit">Registrar</button>
+</form>
+{% endblock %}
