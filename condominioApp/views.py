@@ -3,23 +3,34 @@ from django.shortcuts import render,redirect,get_object_or_404
 from .models  import *
 # Create your views here.
 
+
 # Vista del login
 def index(request):
+
   if request.method == 'GET':
     return render(request, 'login.html')
   else:
     email = request.POST['email']
     password = request.POST['contrasena']
     
-    admins = Directivo.objects.filter(email=email)
+    admins = Directivo.objects.filter(email=email, password=password)
+    users = Users.objects.filter(email=email, password = password)
  
+
     #Acceso a la vista del usuario admin
     for admin in admins:
       if admin.email == email and admin.password == password and admin.acess_id == 1:
         return redirect('view_admin/')
     
+    # Acceso a la vista del usuario comun 
+    for user in users:
+      if user.email == email and user.password == password and user.acess_id == 2:
+        return redirect('view_user/')
+    
     return render(request, 'login.html')
-  
+
+
+
   
 # vista del admin
 def admin(request):
@@ -175,3 +186,9 @@ def create_employee(request):
     Empleado.objects.create(name = name, lastname =lastname , age = age, gender = gender, email = email, charge =  charge, salary =  salary, phone_number =  phone, condominio_id = condominio)
 
     return redirect('/view_admin/')
+
+
+
+# vista del usuario común
+def user(request):
+  return render(request,'view_user.html')
