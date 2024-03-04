@@ -169,6 +169,7 @@ def update_owner(request):
 
         return redirect('/view_admin/')
 
+
 def read_employee(request):
   if request.method == 'GET':
     # Recupera todos los empleados de la base de datos
@@ -204,6 +205,66 @@ def create_employee(request):
     Empleado.objects.create(name = name, lastname =lastname , age = age, gender = gender, email = email, charge =  charge, salary =  salary, phone_number =  phone, condominio_id = condominio)
 
     return redirect('/view_admin/')
+
+def update_employee(request):
+  if request.method == 'GET':
+    empeleado = Empleado.objects.all()
+    condominios = Condominio.objects.all()
+    context ={'empleados': empeleado, 'condominios':condominios}
+    return render(request,'update_employee.html',context)
+  else:
+
+        # Obtener los datos actualizados del formulario
+        empleado_id = request.POST['empleado']
+        name = request.POST['name']
+        lastname = request.POST['lastname']
+        age = request.POST['age']
+        gender = request.POST['gender']
+        email = request.POST['email']
+        charge = request.POST['charge']
+        salary = request.POST['salary']
+        phone = request.POST['phone']
+        condominio_id = request.POST['condominio']
+
+        condominio = get_object_or_404(Condominio, pk=condominio_id)
+
+        empleado = get_object_or_404(Empleado, pk=empleado_id)
+        # Actualizar los campos del empleado
+        empleado.name = name
+        empleado.lastname = lastname
+        empleado.age = age
+        empleado.gender = gender
+        empleado.email = email
+        empleado.charge = charge
+        empleado.salary = salary
+        empleado.phone_number = phone
+        empleado.condominio = condominio
+        
+        # Guardar los cambios en la base de datos
+        empleado.save()
+        return redirect('/view_admin/')
+
+def delete_employee(request):
+  if request.method == 'GET':
+      empleado = Empleado.objects.all()
+
+      # Pasar los datos al contexto de renderizado
+      context = {'empleados': empleado}
+
+      return render(request, 'delete_employee.html', context)
+  else:
+     
+     empleado_id = request.POST['empleado']
+
+     empleado = get_object_or_404(Empleado, pk=empleado_id)
+
+      # Eliminar el condominio
+     empleado.delete()
+     
+     return redirect('/view_admin/')
+
+
+
 
 
 

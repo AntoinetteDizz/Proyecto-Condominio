@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+
+{% block content %}
+
+<!-- Enlace para volver al panel -->
+<a href="/view_admin/">Volver al Panel</a>
+
+<h2>Eliminar Empleado</h2>
+
+<form action="" method="post">
+    
+  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
+
+  <label for="empleado">Seleccionar el usuario a modificar:</label>
+  <select name="empleado" id="empleado">
+    {% for empleado in empleados %}
+      <option value="{{ empleado.id }}">{{ empleado.id }} - {{ empleado.name }} {{ empleado.lastname }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Eliminar</button>
+  
+{%endblock%}
