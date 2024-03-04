@@ -19,7 +19,7 @@ urlpatterns = [
   path('view_admin/read_owner/', views.read_owner, name='read_owner'),
   path('view_admin/create_owner/', views.create_owner, name = 'create_owner'),
   path('view_admin/update_owner/', views.update_owner, name = 'update_owner'),
-
+  path('view_admin/delete_owner/', views.delete_owner, name='delete_owner'),
   #============================================================================
 
   

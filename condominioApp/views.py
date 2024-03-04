@@ -168,6 +168,22 @@ def update_owner(request):
         user.save()
 
         return redirect('/view_admin/')
+      
+
+def delete_owner(request):
+  if request.method == 'GET':
+    owner=Users.objects.all()
+    context = {'usuarios': owner}
+    
+    return render(request, 'delete_owner.html', context)
+  else:
+    user_id = request.POST['user']
+    
+    user = get_object_or_404(Users, pk=user_id)
+    user.delete()
+    
+    
+    return redirect('/view_admin/')
 
 
 def read_employee(request):

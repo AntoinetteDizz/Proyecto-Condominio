@@ -2,67 +2,67 @@ body {
   font-family: 'Montserrat';
   background: linear-gradient(90deg, rgba(77, 67, 255, 0.15730042016806722) 0%, rgba(158, 223, 255, 1) 100%);
   margin: 0;
-  
+
 }
 
-body nav{
+body nav {
   font-family: 'Roboto', sans-serif;
 }
 
-header{
-    
-    
+header {
+
+
   display: flex;
   min-height: 70px;
-  background: linear-gradient(90deg, rgba(77, 67, 255, 0.15730042016806722) 0%, rgba(158, 223, 255, 1) 100%);
+  /* background: linear-gradient(90deg, rgba(77, 67, 255, 0.15730042016806722) 0%, rgba(158, 223, 255, 1) 100%); */
   opacity: .9;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
- 
- 
+
+
 }
-.nombre-pag{
-  font-family:'Ubuntu', sans-serif;
+
+.nombre-pag {
+  font-family: 'Ubuntu', sans-serif;
   color: #040404;
 }
 
-.logo{
+.logo {
   display: flex;
   align-items: center;
 }
 
-.logo img{
+.logo img {
   height: 50px;
   margin-right: 10px;
 }
-nav{
-  
+
+nav {
+
   font-family: 'Roboto', sans-serif;
   z-index: 50;
 }
-.nav-link{
+
+.nav-link {
   font-family: 'Roboto', sans-serif;
 }
 
-nav a{
+nav a {
   color: #000;
   font-size: 1rem;
   font-weight: 600;
-  padding-right: 10px;;
+  padding-right: 10px;
+  ;
 }
 
-nav a:hover{
-  color: rgb(255, 255, 255);
-}
-
-@media (max-width:700px){
-  header{
-      flex-direction: column;
+@media (max-width:700px) {
+  header {
+    flex-direction: column;
   }
 
-  nav{
-      padding: 10px 0px;
+  nav {
+    padding: 10px 0px;
   }
 
 
@@ -122,26 +122,31 @@ button {
 }
 
 a {
-  
+
   margin-top: 20px;
   background-color: #fff;
   display: block;
   text-align: center;
   transition: .5s;
-  text-decoration: none; /* Elimina el subrayado predeterminado */
-    color: #3366cc; /* Cambia el color del texto */
-    font-weight: bold; /* Hace que el texto sea más grueso */
-    font-family: Arial, sans-serif; /* Cambia la fuente del texto */
-    padding: 10px 20px; /* Añade espaciado interno */
-    border: 2px solid #3366cc; /* Añade un borde sólido */
-    border-radius: 5px; /* Hace que los bordes sean redondeados */
-    transition: all 0.3s ease; /* Agrega una transición suave */
+  text-decoration: none;
+  /* Elimina el subrayado predeterminado */
+  color: #3366cc;
+  /* Cambia el color del texto */
+  font-weight: bold;
+  /* Hace que el texto sea más grueso */
+  font-family: Arial, sans-serif;
+  /* Cambia la fuente del texto */
+  padding: 10px 20px;
+  /* Añade espaciado interno */
+  border: 2px solid #3366cc;
+  /* Añade un borde sólido */
+  border-radius: 5px;
+  /* Hace que los bordes sean redondeados */
+  transition: all 0.3s ease;
+  /* Agrega una transición suave */
 }
 
-a:hover {
-  background-color: #3366cc; /* Cambia el color de fondo al pasar el cursor */
-  color: #fff; /* Cambia el color del texto al pasar el cursor */
-}
+
 
 
 /*Estilo de menú desplegable*/
@@ -149,25 +154,35 @@ a:hover {
 /* Dropdown Button */
 .dropbtn {
   margin-top: 20px;
-  margin-right: 5px; /* Margen a la derecha */
+  margin-right: 5px;
+  /* Margen a la derecha */
   background-color: #fff;
   display: block;
   text-align: center;
   transition: .5s;
-  text-decoration: none; /* Elimina el subrayado predeterminado */
-  color: black; /* Cambia el color del texto a negro */
-  font-weight: bold; /* Hace que el texto sea más grueso */
-  font-family: Arial, sans-serif; /* Cambia la fuente del texto */
-  padding: 10px 20px; /* Añade espaciado interno */
-  border: 2px solid #3366cc; /* Añade un borde sólido */
-  border-radius: 5px; /* Hace que los bordes sean redondeados */
-  transition: all 0.3s ease; /* Agrega una transición suave */
+  text-decoration: none;
+  /* Elimina el subrayado predeterminado */
+  color: black;
+  /* Cambia el color del texto a negro */
+  font-weight: bold;
+  /* Hace que el texto sea más grueso */
+  font-family: Arial, sans-serif;
+  /* Cambia la fuente del texto */
+  padding: 10px 20px;
+  /* Añade espaciado interno */
+  border: 2px solid #3366cc;
+  /* Añade un borde sólido */
+  border-radius: 5px;
+  /* Hace que los bordes sean redondeados */
+  transition: all 0.3s ease;
+  /* Agrega una transición suave */
   cursor: pointer;
 }
 
 
 /* Dropdown button on hover & focus */
-.dropbtn:hover, .dropbtn:focus {
+.dropbtn:hover,
+.dropbtn:focus {
   background-color: #3366cc;
   color: #fff;
 }
@@ -183,8 +198,8 @@ a:hover {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  min-width: 100px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -197,7 +212,9 @@ a:hover {
 }
 
 /* Cambiar el color de los enlaces desplegables al pasar el hover */
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {
+  background-color: #f1f1f1
+}
 
 /* Mostrar el dropdown menu en hover */
 .dropdown:hover .dropdown-content {
@@ -209,4 +226,3 @@ a:hover {
   background-color: #3366cc;
   color: #fff;
 }
-
