@@ -9,15 +9,22 @@
  <table>
     <tr>
         <th>Nombre</th>
-        <th>email</th>
+        <th>Apellido</th>
+        <th>Email</th>
+        <th>Edad</th>
+        <th>Género</th>
+        <th>Cargo</th>
+        <th>Salario</th>
+        <th>Teléfono</th>
     </tr>
     {% for empleado in empleados %}
     <tr>
         <td>{{ empleado.name }}</td>
-        <td>{{ empleadp.lastname }}</td>
+        <td>{{ empleado.lastname }}</td>
+        <td>{{ empleado.email }}</td>
         <td>{{ empleado.age }}</td>
         <td>{{ empleado.gender}}</td>
-        <td>{{ empleado.changer}}</td>
+        <td>{{ empleado.charge}}</td>
         <td>{{ empleado.salary}}</td>
         <td>{{ empleado.phone_number}}</td>
     
