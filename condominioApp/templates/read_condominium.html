@@ -13,7 +13,6 @@
         <th>Nombre</th>
         <th>Dirección</th>
         <th>Ciudad</th>
-        <th>Número de Viviendas</th>
         <th>Año de Construcción</th>
     </tr>
     {% for condominio in condominios %}
@@ -21,7 +20,6 @@
         <td>{{ condominio.name }}</td>
         <td>{{ condominio.address }}</td>
         <td>{{ condominio.city }}</td>
-        <td>{{ condominio.number_of_dwellings }}</td>
         <td>{{ condominio.year_construction }}</td>
     </tr>
     {% endfor %}

@@ -54,10 +54,10 @@ def create_condominium(request):
     name = request.POST['name']
     address = request.POST['address']
     city =  request.POST['city']
-    dwellings = request.POST['dwellings']
+
     year =  request.POST['year']
     
-    Condominio.objects.create(name = name , address =address, city = city ,number_of_dwellings =dwellings, year_construction = year)
+    Condominio.objects.create(name = name , address =address, city = city, year_construction = year)
     return redirect('/view_admin/')
   
   
@@ -73,7 +73,6 @@ def update_condominium(request):
         name = request.POST['name']
         address = request.POST['address']
         city =  request.POST['city']
-        dwellings = request.POST['dwellings']
         year =  request.POST['year']
         
         #obtener el ID del condominio seleccionado del formulario
@@ -84,7 +83,6 @@ def update_condominium(request):
         condominio.name = name
         condominio.address = address
         condominio.city = city
-        condominio.number_of_dwellings = dwellings
         condominio.year_construction = year
         condominio.save()
 

@@ -18,10 +18,9 @@ class Condominio(models.Model):
     address = models.CharField(max_length=255)
     city = models.CharField(max_length=100)
     year_construction = models.CharField(max_length=30)
-    number_of_dwellings=models.PositiveIntegerField() #Cantidad de casas o departamentos que hay en el condominio
 
     def __str__(self):
-      return f"[id]: {self.pk} --- [name]:{self.name} --- [address]:{self.address} --- [city]:{self.city} --- [year_construction]:{self.year_construction } --- [Number of dwellings]:{self.number_of_dwellings}"
+      return f"[id]: {self.pk} --- [name]:{self.name} --- [address]:{self.address} --- [city]:{self.city} --- [year_construction]:{self.year_construction }"
   
     class Meta:
         db_table = 'Condominios'
