@@ -12,7 +12,11 @@ urlpatterns = [
   path('view_admin/create_condominium/', views.create_condominium, name='create_condominium'),
   path('view_admin/update_condominium/',views.update_condominium, name='update_condominium'),
   path('view_admin/delete_condominium/',views.delete_condominium, name='delete_condominium'),
+  
+  
   #==========================================================================================
+  path('view_admin/read_condominium/view_edificio/', views.view_edificio, name='view_edificio'),
+
 
 
   #URL PARA EL CRUD DE Propetarios===========================================

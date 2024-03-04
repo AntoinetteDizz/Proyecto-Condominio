@@ -6,7 +6,28 @@
  <!-- CREAR LA PANTILLA DE LA TABLA -->
 
  <!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
-<a href="/view_admin/">Volver al Panel</a>
+
+
+ <header>
+    <a href="" class="logo">
+        <img src="{% static 'img/view_admin.png' %}" alt="Imagen Administrador">
+        <h2 class="nombre-pag">USUARIO ADMINISTRADOR</h2>
+    </a>
+    <nav>
+        <div class="dropdown">
+            <button class="dropbtn">Edificios</button>
+            <div class="dropdown-content">
+                <a href="{% url 'view_edificio'%}">Ver Edificios</a>
+                <a href="">Crear Edificios</a>
+                <a href="">Modificar Edificios</a>
+                <a href="">Eliminar Edificios</a>
+            </div>
+        </div>
+        <a href="/" class="nav-link" style="float: right;">Cerrar Sesión</a>
+    </nav>
+</header>
+
+ <a href="/view_admin/">Volver al Panel</a>
  
 <table>
     <tr>
@@ -24,4 +45,7 @@
     </tr>
     {% endfor %}
 </table>
+
+
+
 {% endblock %}

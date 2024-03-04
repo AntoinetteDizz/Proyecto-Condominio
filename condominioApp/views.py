@@ -278,6 +278,10 @@ def delete_employee(request):
      return redirect('/view_admin/')
 
 
+def view_edificio(request):
+   if request.method == 'GET':
+      
+      return redirect('/view_edificio/')
 
 
 
@@ -285,3 +289,4 @@ def delete_employee(request):
 # vista del usuario común
 def user(request):
   return render(request,'view_user.html')
+

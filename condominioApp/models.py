@@ -26,6 +26,23 @@ class Condominio(models.Model):
         db_table = 'Condominios'
 
 
+class Edificios(models.Model):
+  condominio = models.ForeignKey(Condominio, on_delete=models.CASCADE)
+  bloque = models.CharField(max_length=50,unique=True)
+  year_construction = models.CharField(max_length=30)
+
+  
+  def __str__(self):
+    return f"[id]: {self.pk} --- [condominio_name]:{self.condominio.name}  --- [condominio_adress]:{self.condominio.address} --- [condominio_city]:{self.condominio.city} --- [bloque]:{self.bloque} --- [year_construction]:{self.year_construction}"
+
+  class Meta:
+        db_table='Edificios'
+
+
+
+
+
+
 class Directivo(models.Model):
     name= models.CharField(max_length=50)
     email = models.CharField(max_length=100,unique=True)
@@ -71,3 +88,15 @@ class Users(models.Model):
 
   class Meta:
         db_table = 'Users'
+
+class Departamentos(models.Model):
+  edificios = models.ForeignKey(Edificios, on_delete=models.CASCADE)
+  usuarios = models.ForeignKey(Users, on_delete=models.CASCADE)
+  nro_dpto = models.PositiveBigIntegerField()
+  telefono_casa= models.CharField(max_length=20)
+  status= models.CharField(max_length=20) 
+  def __str__(self):
+    return f"[id]: {self.pk} --- [edificios]:{self.edificios.bloque}  --- [users]:{self.usuarios.name} --- [nro_dpto]:{self.nro_dpto} --- [telefono_casa]:{self.telefono_casa} --- [status]:{self.status}"
+
+  class Meta:
+        db_table='Departamentos'

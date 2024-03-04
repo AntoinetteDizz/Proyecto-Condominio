@@ -7,4 +7,5 @@ admin.site.register(Condominio)
 admin.site.register(Directivo)
 admin.site.register(Empleado)
 admin.site.register(Users)
-
+admin.site.register(Edificios)
+admin.site.register(Departamentos)
