@@ -111,9 +111,16 @@ def delete_condominium(request):
 
 
 
-
-
-
+def read_owner(request):
+  if request.method == 'GET':
+    # Obtener todos los propietarios
+    owners = Users.objects.all()
+    
+    # Preparar el contexto con los propietarios
+    context = {'usuarios': owners}
+    
+    # Renderizar la plantilla HTML pasándole el contexto
+    return render(request, 'read_owner.html', context)
 
 
 def create_owner(request):
@@ -132,16 +139,6 @@ def create_owner(request):
         Users.objects.create(name=name, email=email,password = password  ,acess_id=acess_id, condominio_id=condominio_id)
         
         return redirect('/view_admin/')
-
-def read_owner(request):
-    # Obtener todos los propietarios
-    owners = Users.objects.all()
-    
-    # Preparar el contexto con los propietarios
-    context = {'owners': owners}
-    
-    # Renderizar la plantilla HTML pasándole el contexto
-    return render(request, 'read_owner.html', context)     
 
 def update_owner(request):
     if request.method == 'GET':
@@ -172,6 +169,17 @@ def update_owner(request):
 
         return redirect('/view_admin/')
 
+def read_employee(request):
+  if request.method == 'GET':
+    # Recupera todos los empleados de la base de datos
+    employees = Empleado.objects.all()
+    
+    # Prepara el contexto con los empleados
+    context = {'empleados': employees}
+    
+    # Renderiza la plantilla con el contexto
+    return render(request, 'read_employee.html', context)
+
 
 def create_employee(request):
   if request.method == 'GET':
@@ -196,19 +204,6 @@ def create_employee(request):
     Empleado.objects.create(name = name, lastname =lastname , age = age, gender = gender, email = email, charge =  charge, salary =  salary, phone_number =  phone, condominio_id = condominio)
 
     return redirect('/view_admin/')
-
-
-def view_employee(request):
-    # Recupera todos los empleados de la base de datos
-    employees = Empleado.objects.all()
-    
-    # Prepara el contexto con los empleados
-    context = {'employees': employees}
-    
-    # Renderiza la plantilla con el contexto
-    return render(request, 'view_employee.html', context)
-
-
 
 
 
