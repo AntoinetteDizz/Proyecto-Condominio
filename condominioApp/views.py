@@ -1,35 +1,37 @@
-from django.http import HttpResponse
+from django.utils import timezone
 from django.shortcuts import render,redirect,get_object_or_404
 from .models  import *
 # Create your views here.
 
-
 # Vista del login
 def index(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    else:
+        email = request.POST['email']
+        password = request.POST['contrasena']
+        
+        admins = Directivo.objects.filter(email=email, password=password)
+        users = Users.objects.filter(email=email, password=password)
 
-  if request.method == 'GET':
-    return render(request, 'login.html')
-  else:
-    email = request.POST['email']
-    password = request.POST['contrasena']
-    
-    admins = Directivo.objects.filter(email=email, password=password)
-    users = Users.objects.filter(email=email, password = password)
- 
-
-    #Acceso a la vista del usuario admin
-    for admin in admins:
-      if admin.email == email and admin.password == password and admin.acess_id == 1:
-        return redirect('view_admin/')
-    
-    # Acceso a la vista del usuario comun 
-    for user in users:
-      if user.email == email and user.password == password and user.acess_id == 2:
-        return redirect('view_user/')
-    
-    return render(request, 'login.html')
-
-
+        # Acceso a la vista del usuario admin
+        for admin in admins:
+            if admin.acess.access == "Administrador":
+                request.session['user_type'] = 'admin'  # Guardar el tipo de usuario en la sesión
+                return redirect('view_admin/')
+        
+        # Acceso a la vista del usuario común
+        for user in users:
+          if user.acess.access == "Propietario":
+              request.session['user'] = {
+                  'id': user.id,
+                  'name': user.name,
+                  'email': user.email,
+                  # Agrega cualquier otro atributo que desees incluir en la sesión
+              }
+          request.session['user_type'] = 'user'  # Guardar el tipo de usuario en la sesión
+          return redirect('view_user/')
+        return render(request, 'login.html', {'error_message': 'Credenciales inválidas'})  # Pasar un mensaje de error a la vista
 
   
 # vista del admin
@@ -113,10 +115,8 @@ def read_owner(request):
   if request.method == 'GET':
     # Obtener todos los propietarios
     owners = Users.objects.all()
-    
     # Preparar el contexto con los propietarios
     context = {'usuarios': owners}
-    
     # Renderizar la plantilla HTML pasándole el contexto
     return render(request, 'read_owner.html', context)
 
@@ -291,9 +291,6 @@ def view_edificio(request):
     return render(request, 'view_edificio.html', context)
 
 
-
-
-
 def create_edificio(request):
   if request.method == 'GET':
     
@@ -348,19 +345,14 @@ def delete_edificio(request):
      edificio.delete()
      return redirect('/view_admin/read_condominium/')
 
-
-
 def read_departamento(request):
-  if request.method == 'GET':
-    # Recupera todos los edificios de la base de datos
-    departamento = Departamentos.objects.all()
-    
-    # Prepara el contexto con los edificios
-    context = {'departamentos': departamento}
-    
-    # Renderiza la plantilla con el contexto
-    return render(request, 'read_departamento.html', context)
+    # Obtener todos los departamentos
+    departamentos = Departamentos.objects.all()
+    departamento_user = Departamento_user.objects.all()
 
+    # Pasar los datos al template
+    context = {'departamentos': departamentos, 'departamentos_user': departamento_user}
+    return render(request, 'read_departamento.html', context)
 
 def create_departamento(request):
     if request.method == 'GET':
@@ -371,17 +363,64 @@ def create_departamento(request):
         edificios = request.POST['edificio']
         nro_dpto = request.POST['nro_dpto']
         telefono_casa = request.POST['telefono_casa']
-        # Asegúrate de que el campo status sea False si no se proporciona en el formulario
-        status = request.POST.get('status', False)
+        status = request.POST['status']
 
         Departamentos.objects.create(edificios_id=edificios, nro_dpto=nro_dpto, telefono_casa=telefono_casa, status=status)
-        return redirect('/view_admin/read_condominium/view_edificio')
+        return redirect('read_departamento')
 
 
+def update_departamento(request):
+    if request.method == 'GET':
+      departamentos = Departamentos.objects.all()
+      users = Users.objects.all()
+      context = {'departamentos': departamentos, 'users': users}
+      return render(request, 'update_departamento.html', context)
+    
+    if request.method == 'POST':
+        departamento_id = request.POST['departamento']
+        departamento = Departamentos.objects.get(pk=departamento_id)
+        departamento.nro_dpto = request.POST['nro_dpto']
+        departamento.telefono_casa = request.POST['telefono_casa']
+
+        status = request.POST['status']
+        if status == 'false':
+            departamento.status = False
+            departamento_user = Departamento_user.objects.filter(departamento=departamento).first()
+            if departamento_user:
+                departamento_user.delete()
+        else:
+            departamento.status = True
+            user_id = int(status)
+            user = Users.objects.get(pk=user_id)
+            fecha_compra = timezone.now()
+            departamento_user = Departamento_user(departamento=departamento, users=user, fecha_compra=fecha_compra)
+            departamento_user.save()
+
+        departamento.save()
+        return redirect('read_departamento')  
+
+def delete_departamento(request):
+    if request.method == 'GET':
+        departamentos = Departamentos.objects.all()
+        # Pasar los datos al contexto de renderizado
+        context = {'departamentos': departamentos}
+        return render(request, 'delete_departamento.html', context)
+    else:
+        departamento_id = request.POST['departamento']
+        departamento = get_object_or_404(Departamentos, pk=departamento_id)
+        # Eliminar el departamento
+        departamento.delete()
+        return redirect('read_departamento')
 
 
-
-# vista del usuario común
 def user(request):
-  return render(request,'view_user.html')
+    try:
+        user = request.session['user']  # Obtener el usuario de la sesión
+        departamentos_usuario = Departamento_user.objects.filter(users=user['id'])  # Filtrar los departamentos del usuario por su ID
 
+        context = {'user_info': user, 'departamentos_usuario': departamentos_usuario, 'session_present': True}
+        return render(request, 'view_user.html', context)
+    except KeyError:
+        # Si no se encuentra la sesión del usuario, pasar la variable de contexto como False
+        context = {'session_present': False}
+        return render(request, 'view_user.html', context)

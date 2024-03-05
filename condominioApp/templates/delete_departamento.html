@@ -1,0 +1,24 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+
+{% block content %}
+
+<!-- Enlace para volver al panel -->
+<a href="/view_admin/">Volver al Panel</a>
+
+<h2>Eliminar departamento</h2>
+
+<form action="" method="post">
+    
+  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
+
+  <label for="departamento">Seleccionar el departamento a eliminar:</label>
+  <select name="departamento" id="departamento">
+    {% for departamento in departamentos %}
+      <option value="{{ departamento.id }}">ID: {{ departamento.id }} - Bloque:{{ departamento.edificios.bloque }} - Nro:{{ departamento.nro_dpto }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Eliminar</button>
+  
+</form>
+{% endblock %}

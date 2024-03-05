@@ -1,10 +1,37 @@
-{%extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
+{% load static %}
 
-{%load static%}
+{% block content %}
+
+{% if session_present %}
+    <h1>Bienvenido</h1>
+        
+    {% if request.session.user %}
+        <p>Tu ID de usuario es: {{ request.session.user.id }}</p>
+        <p>Tu nombre de usuario es: {{ request.session.user.name }}</p>
+        <p>Tu correo electrónico es: {{ request.session.user.email }}</p>
+    {% endif %}
+        <h1>Bienvenido, {{ user_info.name }}</h1>
+        <h2>Tus departamentos:</h2>
+        {% if departamentos_usuario %}
+            <!-- El objeto departamentos no está vacío, puedes mostrar su contenido -->
+            <ul>
+                {% for departamento in departamentos_usuario %}
+                    <b>Departamento: </b>
+                    <li>Condominio: {{ departamento.departamento.edificios.condominio.name }}</li>
+                    <li>Edificio: {{ departamento.departamento.edificios.bloque }}</li>
+                    <li>Nro departamento: {{ departamento.departamento.nro_dpto }}</li>
+                {% endfor %}
+            </ul>   
+        {% else %}
+            <!-- El objeto departamentos está vacío, muestra un mensaje o realiza alguna acción alternativa -->
+            <p>No hay departamentos disponibles.</p>
+        {% endif %}
+{% else %}
+    <!-- Mostrar un mensaje de error si no se encuentra la sesión -->
+    <h1>Error: No se encontró la sesión del usuario, Login: <a href="/" >Login</a></h1>
+{% endif %}
+
+{% endblock %}
 
 
-{%block content%}
-
-<h1>Hola usuario común</h1>
-
-{%endblock%}

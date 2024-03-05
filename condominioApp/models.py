@@ -39,10 +39,6 @@ class Edificios(models.Model):
         db_table='Edificios'
 
 
-
-
-
-
 class Directivo(models.Model):
     name= models.CharField(max_length=50)
     email = models.CharField(max_length=100,unique=True)
@@ -93,7 +89,7 @@ class Departamentos(models.Model):
     edificios = models.ForeignKey(Edificios, on_delete=models.CASCADE)
     nro_dpto = models.PositiveBigIntegerField()
     telefono_casa = models.CharField(max_length=20)
-    status = models.BooleanField(default=True)  # Cambiado a un campo booleano
+    status = models.BooleanField(default=False)  # Cambiado a un campo booleano
 
     def str(self):
         return f"[id]: {self.pk} --- [edificios]:{self.edificios.bloque}  --- [nro_dpto]:{self.nro_dpto} --- [telefono_casa]:{self.telefono_casa} --- [status]:{self.status}"
@@ -103,11 +99,11 @@ class Departamentos(models.Model):
 
 
 class Departamento_user(models.Model):
-  edificios = models.ForeignKey(Edificios, on_delete=models.CASCADE)
+  departamento = models.ForeignKey(Departamentos, on_delete=models.CASCADE)
   users = models.ForeignKey(Users, on_delete=models.CASCADE)
   fecha_compra = models.DateField()
   def __str__(self):
-    return f"[id]: {self.pk} --- [edificios]:{self.edificios.bloque} --- [users]:{self.users.name} --- [fecha_compra]:{self.fecha_compra}"
+    return f"[id]: {self.pk} --- [departamento]:{self.deparmento.nro_dpto} --- [users]:{self.users.name} --- [fecha_compra]:{self.fecha_compra}"
 
   class Meta:
         db_table='Departamento_user'

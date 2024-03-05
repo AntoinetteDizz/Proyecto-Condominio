@@ -24,16 +24,9 @@ urlpatterns = [
 #URL PARA EL CRUD DE DEPARTAMENTOS============================================================
   path('view_admin/read_condominium/view_edificio/read_departamento/', views.read_departamento, name='read_departamento'),
   path('view_admin/read_condominium/view edificio/create_departamento/', views.create_departamento, name='create_departamento'),
-  path('view_admin/read_condominium/view_edificio/update_departamento/', views.read_departamento, name='update_departamento'),
-  path('view_admin/read_condominium/view_edificio/delete_departamento/', views.read_departamento, name='delete_departamento'),
+  path('view_admin/read_condominium/view_edificio/update_departamento/', views.update_departamento, name='update_departamento'),
+  path('view_admin/read_condominium/view_edificio/delete_departamento/', views.delete_departamento, name='delete_departamento'),
   #==========================================================================================
-
-
-
-
-
-
-
 
   #URL PARA EL CRUD DE Propetarios===========================================
   path('view_admin/read_owner/', views.read_owner, name='read_owner'),
@@ -41,7 +34,6 @@ urlpatterns = [
   path('view_admin/update_owner/', views.update_owner, name = 'update_owner'),
   path('view_admin/delete_owner/', views.delete_owner, name='delete_owner'),
   #============================================================================
-
   
   #URL PARA EL CRUD DE Empleados====================================================
   path('view_admin/read_employee/', views.read_employee, name = 'read_employee'),
@@ -49,7 +41,6 @@ urlpatterns = [
   path('view_admin/update_employee/', views.update_employee, name = 'update_employee'),
   path('view_admin/delete_employee/', views.delete_employee, name = 'delete_employee'),
   #====================================================================================
-
 
   path('view_user/',views.user)
 

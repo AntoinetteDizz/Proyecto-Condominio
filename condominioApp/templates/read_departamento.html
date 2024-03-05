@@ -1,31 +1,52 @@
-{% extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
 {% load static %}
 
+{% block content %}
 
-{%block content%}
-
- <!-- CREAR LA PANTILLA DE LA TABLA -->
-
-
- <!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
+<!-- CREAR LA PANTILLA DE LA TABLA -->
 <a href="/view_admin/">Volver al Panel</a>
  
- <table>
+<table>
     <tr>
         <th>Edificio</th>
         <th>Número de departamento</th>
-        <th>Propietarios</th>
         <th>Teléfono de casa</th>
         <th>Status</th>
+        <th>Fecha de compra</th>
+        <th>Propietario</th>
     </tr>
     {% for departamento in departamentos %}
     <tr>
-        <td>{{ departamento.edificio.bloque}}</td>
-        <td>{{ departamento.bloque }}</td>
-        <td>{{ departamento.year_construction }}</td>
+        <td>{{ departamento.edificios.bloque }}</td>
+        <td>{{ departamento.nro_dpto }}</td>
+        <td>{{ departamento.telefono_casa }}</td>
+        <td>
+            {% if departamento.status %}
+                Vendido
+            {% else %}
+                Sin vender
+            {% endif %}
+        </td>
+        <td>
+
+            {% for departamento_user in departamentos_user %}
+                {% if departamento_user.departamento.id == departamento.id %}
+                    {{departamento_user.fecha_compra|date:"d/m/Y"}}
+                {% endif %}
+            {% empty %}
+                N/A
+            {% endfor %}
+        </td>
+        <td>
+            {% for departamento_user in departamentos_user %}
+                {% if departamento_user.departamento.id == departamento.id %}
+                    {{ departamento_user.users.name }}
+                {% endif %}
+            {% empty %}
+                Sin vender
+            {% endfor %}
+        </td>
     </tr>
     {% endfor %}
 </table>
-
-
-{%endblock%}
+{% endblock %}
