@@ -278,10 +278,105 @@ def delete_employee(request):
      return redirect('/view_admin/')
 
 
+
 def view_edificio(request):
-   if request.method == 'GET':
-      
-      return redirect('/view_edificio/')
+  if request.method == 'GET':
+    # Recupera todos los edificios de la base de datos
+    edificios = Edificios.objects.all()
+    
+    # Prepara el contexto con los edificios
+    context = {'edificios': edificios}
+    
+    # Renderiza la plantilla con el contexto
+    return render(request, 'view_edificio.html', context)
+
+
+
+
+
+def create_edificio(request):
+  if request.method == 'GET':
+    
+    condominios = Condominio.objects.all()
+    context = {'condominios': condominios}
+    return render(request, 'create_edificio.html', context)
+  else:
+    condominio = request.POST['condominio']
+    bloque = request.POST['bloque']
+    year_construction = request.POST['year_construction']
+    # Obtener la instancia de Condominio correspondiente al ID proporcionado
+    # condominio = get_object_or_404(Condominio, pk=condominio_id)
+        
+    Edificios.objects.create(condominio_id = condominio , bloque = bloque, year_construction= year_construction)
+
+    return redirect('/view_admin/read_condominium/')
+
+
+def update_edificio(request):
+  if request.method == 'GET':
+    edificio = Edificios.objects.all()
+    condominios = Condominio.objects.all()
+    context ={'edificios': edificio, 'condominios':condominios}
+    return render(request,'update_edificio.html',context)
+  else:
+
+        # Obtener los datos actualizados del formulario
+        edificio_id = request.POST['edificio']
+        bloque = request.POST['bloque']
+        year_construction = request.POST['year_construction']
+        
+
+        edificio = get_object_or_404(Edificios, pk=edificio_id)
+        # Actualizar los campos del empleado
+        edificio.bloque = bloque
+        edificio.year_construction = year_construction     
+        # Guardar los cambios en la base de datos
+        edificio.save()
+        return redirect('/view_admin/read_condominium/')
+
+
+def delete_edificio(request):
+  if request.method == 'GET':
+      edificio = Edificios.objects.all()
+      # Pasar los datos al contexto de renderizado
+      context = {'edificios': edificio}
+      return render(request, 'delete_edificio.html', context)
+  else:
+     edificio_id = request.POST['edificio']
+     edificio = get_object_or_404(Edificios, pk=edificio_id)
+      # Eliminar el condominio
+     edificio.delete()
+     return redirect('/view_admin/read_condominium/')
+
+
+
+def read_departamento(request):
+  if request.method == 'GET':
+    # Recupera todos los edificios de la base de datos
+    departamento = Departamentos.objects.all()
+    
+    # Prepara el contexto con los edificios
+    context = {'departamentos': departamento}
+    
+    # Renderiza la plantilla con el contexto
+    return render(request, 'read_departamento.html', context)
+
+
+def create_departamento(request):
+    if request.method == 'GET':
+        edificios = Edificios.objects.all() 
+        context = {'edificios': edificios}
+        return render(request, 'create_departamento.html', context)
+    else:
+        edificios = request.POST['edificio']
+        nro_dpto = request.POST['nro_dpto']
+        telefono_casa = request.POST['telefono_casa']
+        # Asegúrate de que el campo status sea False si no se proporciona en el formulario
+        status = request.POST.get('status', False)
+
+        Departamentos.objects.create(edificios_id=edificios, nro_dpto=nro_dpto, telefono_casa=telefono_casa, status=status)
+        return redirect('/view_admin/read_condominium/view_edificio')
+
 
 
 

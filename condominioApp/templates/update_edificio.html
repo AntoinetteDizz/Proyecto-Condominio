@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+
+{% block content %}
+
+<!-- Enlace para volver al panel -->
+<a href="/view_admin/">Volver al Panel</a>
+
+<h2>Modificar Edificio</h2>
+
+<form action="" method="post">
+    
+  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
+
+
+  <label for="edificio">Seleccionar el Edificio a modificar:</label>
+  <select name="edificio" id="edificio">
+    {% for edificio in edificios %}
+      <option value="{{ edificio.id }}">{{ edificio.id }} - {{ edificio.bloque }} {{ edificio.year_construction }}</option>
+    {% endfor %}
+  </select>
+
+
+  <label for="bloque">Bloque:</label>
+  <input type="text" id="bloque" name="bloque" required>
+
+  <label for="year_construction">Fecha de construction:</label>
+  <input type="date" id="year_construction" name="year_construction" required>
+
+  <button type="submit">Actualizar</button>
+
+</form>
+
+{% endblock %}

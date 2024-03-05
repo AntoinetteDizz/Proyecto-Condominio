@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
+<a href="/view_admin/">Volver al Panel</a>
+
+<h1>Crear Edificio</h1>
+
+
+<!-- hay que crear una card que estructure el formulario -->
+
+<form action="" method="post">
+
+  {% csrf_token %}
+
+
+  <label for="condominio">Seleccionar el Condominio que le pertenece:</label>
+  <select name="condominio" id="condominio" required>
+    <option value="">Select</option>
+    {% for condominio in condominios %}
+    <option value="{{ condominio.id }}">{{ condominio.name }} - {{ condominio.address }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="">Bloque</label>
+  <input type="text" name="bloque" id="" required>
+
+  <label for="">Year construction</label>
+  <input type="date" id="" name="year_construction" required>
+
+  <button type="submit">Crear</button>
+
+</form>
+
+
+{% endblock %}

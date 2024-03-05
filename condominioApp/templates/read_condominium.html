@@ -18,9 +18,9 @@
             <button class="dropbtn">Edificios</button>
             <div class="dropdown-content">
                 <a href="{% url 'view_edificio'%}">Ver Edificios</a>
-                <a href="">Crear Edificios</a>
-                <a href="">Modificar Edificios</a>
-                <a href="">Eliminar Edificios</a>
+                <a href="{% url 'create_edificio'%}">Crear Edificios</a>
+                <a href="{% url 'update_edificio'%}">Modificar Edificios</a>
+                <a href="{% url 'delete_edificio'%}">Eliminar Edificios</a>
             </div>
         </div>
         <a href="/" class="nav-link" style="float: right;">Cerrar Sesión</a>

@@ -1,7 +1,52 @@
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/base.html'%}
 {% load static %}
 
-{% block content %}
+
+{%block content%}
+
+<header>
+    <a href="" class="logo">
+        <img src="{% static 'img/view_admin.png' %}" alt="Imagen Administrador">
+        <h2 class="nombre-pag">USUARIO ADMINISTRADOR</h2>
+    </a>
+    <nav>
+        <div class="dropdown">
+            <button class="dropbtn">Departamentos</button>
+            <div class="dropdown-content">
+                <a href="{% url 'read_departamento'%}">Ver Departamentos</a>
+                <a href="{% url 'create_departamento'%}">Crear Departamentos</a>
+                <a href="{% url 'update_departamento'%}">Modificar Departamentos</a>
+                <a href="{% url 'delete_departamento'%}">Eliminar Departamentos</a>
+            </div>
+        </div>
+        <a href="/" class="nav-link" style="float: right;">Cerrar Sesión</a>
+    </nav>
+</header>
+
+ 
+ 
 
 
-{% endblock %}
+ <!-- CREAR LA PANTILLA DE LA TABLA -->
+
+
+ <!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
+<a href="/view_admin/">Volver al Panel</a>
+ 
+ <table>
+    <tr>
+        <th>Condominio</th>
+        <th>Bloque</th>
+        <th>Año de Construcción</th>
+    </tr>
+    {% for edificio in edificios %}
+    <tr>
+        <td>{{ edificio.condominio.name}}</td>
+        <td>{{ edificio.bloque }}</td>
+        <td>{{ edificio.year_construction }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+{%endblock%}

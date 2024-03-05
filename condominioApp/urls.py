@@ -12,10 +12,26 @@ urlpatterns = [
   path('view_admin/create_condominium/', views.create_condominium, name='create_condominium'),
   path('view_admin/update_condominium/',views.update_condominium, name='update_condominium'),
   path('view_admin/delete_condominium/',views.delete_condominium, name='delete_condominium'),
-  
-  
   #==========================================================================================
+  
+  #URL PARA EL CRUD DE EDIFICIOS============================================================
   path('view_admin/read_condominium/view_edificio/', views.view_edificio, name='view_edificio'),
+  path('view_admin/read_condominium/create_edificio/', views.create_edificio, name='create_edificio'),
+  path('view_admin/read_condominium/update_edificio/', views.update_edificio, name='update_edificio'),
+  path('view_admin/read_condominium/delete_edificio/', views.delete_edificio, name='delete_edificio'),
+  #==========================================================================================
+
+#URL PARA EL CRUD DE DEPARTAMENTOS============================================================
+  path('view_admin/read_condominium/view_edificio/read_departamento/', views.read_departamento, name='read_departamento'),
+  path('view_admin/read_condominium/view edificio/create_departamento/', views.create_departamento, name='create_departamento'),
+  path('view_admin/read_condominium/view_edificio/update_departamento/', views.read_departamento, name='update_departamento'),
+  path('view_admin/read_condominium/view_edificio/delete_departamento/', views.read_departamento, name='delete_departamento'),
+  #==========================================================================================
+
+
+
+
+
 
 
 

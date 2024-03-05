@@ -90,13 +90,24 @@ class Users(models.Model):
         db_table = 'Users'
 
 class Departamentos(models.Model):
+    edificios = models.ForeignKey(Edificios, on_delete=models.CASCADE)
+    nro_dpto = models.PositiveBigIntegerField()
+    telefono_casa = models.CharField(max_length=20)
+    status = models.BooleanField(default=True)  # Cambiado a un campo booleano
+
+    def str(self):
+        return f"[id]: {self.pk} --- [edificios]:{self.edificios.bloque}  --- [nro_dpto]:{self.nro_dpto} --- [telefono_casa]:{self.telefono_casa} --- [status]:{self.status}"
+
+    class Meta:
+        db_table = 'Departamentos'
+
+
+class Departamento_user(models.Model):
   edificios = models.ForeignKey(Edificios, on_delete=models.CASCADE)
-  usuarios = models.ForeignKey(Users, on_delete=models.CASCADE)
-  nro_dpto = models.PositiveBigIntegerField()
-  telefono_casa= models.CharField(max_length=20)
-  status= models.CharField(max_length=20) 
+  users = models.ForeignKey(Users, on_delete=models.CASCADE)
+  fecha_compra = models.DateField()
   def __str__(self):
-    return f"[id]: {self.pk} --- [edificios]:{self.edificios.bloque}  --- [users]:{self.usuarios.name} --- [nro_dpto]:{self.nro_dpto} --- [telefono_casa]:{self.telefono_casa} --- [status]:{self.status}"
+    return f"[id]: {self.pk} --- [edificios]:{self.edificios.bloque} --- [users]:{self.users.name} --- [fecha_compra]:{self.fecha_compra}"
 
   class Meta:
-        db_table='Departamentos'
+        db_table='Departamento_user'
