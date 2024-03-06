@@ -22,11 +22,33 @@
                     <li>Edificio: {{ departamento.departamento.edificios.bloque }}</li>
                     <li>Nro departamento: {{ departamento.departamento.nro_dpto }}</li>
                 {% endfor %}
-            </ul>   
-        {% else %}
-            <!-- El objeto departamentos está vacío, muestra un mensaje o realiza alguna acción alternativa -->
-            <p>No hay departamentos disponibles.</p>
-        {% endif %}
+            </ul>
+        <h2>Pagos realizados:</h2>
+            {% for pago in pagos_condominio %}
+                <b>Pagos realizados para el condominio {{ pago.condominio.name }}:</b>
+                {% if pago.pagos %}
+                    <ul>
+                        {% for pago_condominio in pago.pagos %}
+                            <li>Monto: {{ pago_condominio.monto_pago }}</li>
+                            {% if pago_condominio.descripcion%}
+                                <li>Descripción: {{ pago_condominio.descripcion }}</li>
+                            {% else %}
+                                <li>Descripción: (sin descripcion)</li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <li>No se encontraron pagos realizados.</li>
+                {% endif %}
+            {% endfor %}
+
+        <form action="{% url 'pago_mantenimiento' %}" method="GET">
+            <button type="submit">Pagar Mantenimiento de Condominios</button>
+        </form>
+    {% else %}
+        <!-- El objeto departamentos está vacío, muestra un mensaje o realiza alguna acción alternativa -->
+        <p>No hay departamentos disponibles.</p>
+    {% endif %}
 {% else %}
     <!-- Mostrar un mensaje de error si no se encuentra la sesión -->
     <h1>Error: No se encontró la sesión del usuario, Login: <a href="/" >Login</a></h1>

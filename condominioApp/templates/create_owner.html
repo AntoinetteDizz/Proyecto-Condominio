@@ -20,13 +20,6 @@
   <label for="contrasena">Contraseña:</label>
   <input type="password" id="contrasena" name="password" required>
 
-  <label for="condominio">Seleccionar el Condominio que le pertenece:</label>
-  <select name="condominio" id="condominio">
-    {% for condominio in condominios %}
-    <option value="{{ condominio.id }}">{{ condominio.name }} - {{ condominio.address }}</option>
-    {% endfor %}
-  </select>
-
   <input type="hidden" value="2" id="acceso" name="acceso" >
   <button type="submit">Registrar</button>
 </form>

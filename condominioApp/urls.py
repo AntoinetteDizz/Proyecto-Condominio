@@ -42,7 +42,11 @@ urlpatterns = [
   path('view_admin/delete_employee/', views.delete_employee, name = 'delete_employee'),
   #====================================================================================
 
-  path('view_user/',views.user)
+  #URL PARA EL MANTENIMIENTO DE CONDOMINIOS====================================================
+  path('view_user/pago_mantenimiento/', views.procesar_pagos, name = 'pago_mantenimiento'),
+  #====================================================================================
+
+  path('view_user/',views.user, name='inicio_usuario')
 
 ]
 

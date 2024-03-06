@@ -74,7 +74,7 @@ WSGI_APPLICATION = 'ProyectoCondominio.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'railway',
@@ -82,6 +82,17 @@ DATABASES = {
         'PASSWORD': 'gg6Ab*ccd*-f-31fDc6gca5cF4eBgBCB',
         'HOST': 'viaduct.proxy.rlwy.net',
         'PORT': '24856',
+    }
+}"""
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'Condomio_db',
+        'USER': 'postgres',
+        'PASSWORD': 'diaz3214',
+        'HOST': 'localhost',  # Si PostgreSQL está instalado localmente
+        'PORT': '5432',  # El puerto predeterminado de PostgreSQL es 5432
     }
 }
 

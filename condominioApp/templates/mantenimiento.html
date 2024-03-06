@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+
+{%block content%}
+
+<h1>Procesar Pagos de Mantenimiento</h1>
+    {% if session_present %}
+    <form method="POST">
+        {% csrf_token %}
+        <label for="condominio">Seleccionar condominio:</label>
+        <select name="condominio" id="condominio">
+            {% for departamento in departamentos_usuario %}
+                <option value="{{ departamento.departamento.edificios.condominio.id }}">{{ departamento.departamento.edificios.condominio.name }}</option>
+            {% endfor %}
+        </select><br><br>
+        <label for="monto">Monto de pago:</label>
+        <input type="number" name="monto" id="monto" step="0.01" required><br><br>
+        <label for="descripcion">Descripción (opcional):</label><br>
+        <textarea name="descripcion" id="descripcion" rows="4" cols="50"></textarea><br><br>
+        <button type="submit">Procesar Pago</button>
+    </form>
+    {% else %}
+    <p>No se ha iniciado sesión.</p>
+    {% endif %}
+{%endblock%}

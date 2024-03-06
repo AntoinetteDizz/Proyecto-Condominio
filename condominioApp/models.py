@@ -77,10 +77,9 @@ class Users(models.Model):
   email = models.CharField(max_length=100,unique=True)
   password= models.CharField(max_length=40)
   acess= models.ForeignKey(RoleType, on_delete=models.CASCADE)
-  condominio = models.ForeignKey(Condominio, on_delete=models.CASCADE)
   
   def __str__(self):
-    return f"[id]: {self.pk} --- [name]:{self.name} --- [email]:{self.email} --- [password]:{self.password} --- [acess]:{self.acess.access} --- [condominio_name]:{self.condominio.name} --- [condominio_adress]:{self.condominio.address} --- [condominio_city]:{self.condominio.city}"
+    return f"[id]: {self.pk} --- [name]:{self.name} --- [email]:{self.email} --- [password]:{self.password} --- [acess]:{self.acess.access}"
 
   class Meta:
         db_table = 'Users'
@@ -107,3 +106,15 @@ class Departamento_user(models.Model):
 
   class Meta:
         db_table='Departamento_user'
+
+class Mantenimiento(models.Model):
+  condominio = models.ForeignKey(Condominio, on_delete=models.CASCADE)
+  usuario = models.ForeignKey(Users, on_delete=models.CASCADE)
+  monto_pago = models.DecimalField(max_digits=10, decimal_places=2)
+  descripcion = models.TextField(blank=True)
+
+  def __str__(self):
+      return f"[id]: {self.pk} --- [condominio]:{self.condominio.name} ---  [users]:{self.users.name} --- [descripcion]:{self.descripcion}"
+
+  class Meta:
+      db_table = 'Mantenimiento'

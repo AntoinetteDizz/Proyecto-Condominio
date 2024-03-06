@@ -131,10 +131,9 @@ def create_owner(request):
         name = request.POST['name']
         email = request.POST['email']
         password= request.POST['password']
-        condominio_id = request.POST['condominio']
         acess_id = request.POST['acceso']
 
-        Users.objects.create(name=name, email=email,password = password  ,acess_id=acess_id, condominio_id=condominio_id)
+        Users.objects.create(name=name, email=email,password = password  ,acess_id=acess_id)
         
         return redirect('/view_admin/')
 
@@ -152,17 +151,12 @@ def update_owner(request):
         email = request.POST['email']
         password = request.POST['password']
         id_user = request.POST['usuario']
-        condominio_id = request.POST['condominio']
-
-        # Obtener la instancia de Condominio correspondiente al ID proporcionado
-        condominio = get_object_or_404(Condominio, pk=condominio_id)
 
         # Actualizar el usuario seleccionado usando su ID
         user = Users.objects.get(pk=id_user)
         user.name = name
         user.email = email
         user.password = password
-        user.condominio = condominio
         user.save()
 
         return redirect('/view_admin/')
@@ -418,9 +412,45 @@ def user(request):
         user = request.session['user']  # Obtener el usuario de la sesión
         departamentos_usuario = Departamento_user.objects.filter(users=user['id'])  # Filtrar los departamentos del usuario por su ID
 
-        context = {'user_info': user, 'departamentos_usuario': departamentos_usuario, 'session_present': True}
+        # Crear una lista para almacenar los pagos asociados a cada condominio
+        pagos_condominio = []
+
+        # Iterar sobre los departamentos del usuario
+        for departamento in departamentos_usuario:
+            condominio_id = departamento.departamento.edificios.condominio.id
+
+            # Filtrar los pagos asociados al condominio actual
+            pagos = Mantenimiento.objects.filter(condominio_id=condominio_id)
+
+            # Agregar los pagos asociados al condominio a la lista de pagos_condominio
+            pagos_condominio.append({'condominio': departamento.departamento.edificios.condominio, 'pagos': pagos})
+
+        context = {'user_info': user, 'departamentos_usuario': departamentos_usuario, 'pagos_condominio': pagos_condominio, 'session_present': True}
         return render(request, 'view_user.html', context)
     except KeyError:
         # Si no se encuentra la sesión del usuario, pasar la variable de contexto como False
         context = {'session_present': False}
         return render(request, 'view_user.html', context)
+
+def procesar_pagos(request):
+    if 'user' in request.session:
+      user_id = request.session['user']['id']  # Obtener el ID de usuario de la sesión
+      usuario = Users.objects.get(pk=user_id)
+      user = request.session['user']
+      if request.method == 'POST':
+          condominio_id = request.POST.get('condominio')
+          monto = request.POST.get('monto')
+          descripcion = request.POST.get('descripcion')
+
+          mantenimiento = Mantenimiento(condominio_id=condominio_id, usuario=usuario, monto_pago=monto, descripcion=descripcion)
+          mantenimiento.save()
+
+          # Redireccionar a alguna página de éxito o a la misma página
+          return redirect('inicio_usuario') 
+      else:
+        departamentos_usuario = Departamento_user.objects.filter(users=user['id'])
+        context = {'user_info': user, 'session_present': True, 'departamentos_usuario': departamentos_usuario }
+        return render(request, 'mantenimiento.html', context)
+    else:
+        context = {'session_present': False}
+        return render(request, 'mantenimiento.html', context)
