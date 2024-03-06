@@ -102,7 +102,7 @@ class Departamento_user(models.Model):
   users = models.ForeignKey(Users, on_delete=models.CASCADE)
   fecha_compra = models.DateField()
   def __str__(self):
-    return f"[id]: {self.pk} --- [departamento]:{self.deparmento.nro_dpto} --- [users]:{self.users.name} --- [fecha_compra]:{self.fecha_compra}"
+    return f"[id]: {self.pk} --- [departamento]:{self.departamento.nro_dpto} --- [users]:{self.users.name} --- [fecha_compra]:{self.fecha_compra}"
 
   class Meta:
         db_table='Departamento_user'
