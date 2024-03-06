@@ -1,40 +1,53 @@
-{% extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
 {% load static %}
 
 {% block content %}
 
-<!-- Enlace para volver al panel -->
-<a href="/view_admin/">Volver al Panel</a>
+<div class="container" style="margin-top: 20px;">
+  <div class="card">
+    <a href="/view_admin/" class="button">Volver al Panel</a>
 
-<h2>Actualizar Departamento</h2>
+    <h2>Actualizar Departamento</h2>
 
-<form action="" method="post">
-    
-  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
+    <form action="" method="post">
+      {% csrf_token %}
 
-  <label for="departamento">Seleccionar el Departamento a actualizar:</label>
-  <select name="departamento" id="departamento">
-    {% for departamento in departamentos %}
-      <option value="{{ departamento.id }}">ID:{{ departamento.id }} - Nro:{{ departamento.nro_dpto }} - Bloque:{{ departamento.edificios.bloque }}</option>
-    {% endfor %}
-  </select>
+      <div class="form-group">
+        <label for="departamento">Seleccionar el Departamento a actualizar:</label>
+        <div class="select">
+        <select name="departamento" id="departamento" required>
+          {% for departamento in departamentos %}
+          <option value="{{ departamento.id }}">ID:{{ departamento.id }} - Nro:{{ departamento.nro_dpto }} - Bloque:{{ departamento.edificios.bloque }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      </div>
 
-  <label for="nro_dpto">Número de departamento:</label>
-  <input type="text" id="nro_dpto" name="nro_dpto" required>
+      <div class="form-group">
+        <label for="nro_dpto">Número de departamento:</label>
+        <input type="text" id="nro_dpto" name="nro_dpto" required>
+      </div>
 
-  <label for="telefono_casa">Teléfono de casa:</label>
-  <input type="text" id="telefono_casa" name="telefono_casa" required>
+      <div class="form-group">
+        <label for="telefono_casa">Teléfono de casa:</label>
+        <input type="text" id="telefono_casa" name="telefono_casa" required>
+      </div>
 
-  <label for="status">Status del departamento</label>
-  <select name="status" id="status">
-    <option value="false">Sin vender</option>
-    {% for user in users %}
-      <option value="{{ user.id }}">Vendido a {{ user.name }} - {{ user.email }}</option>
-    {% endfor %}
-  </select>
+      <div class="form-group">
+        <label for="status">Status del departamento:</label>
+        <div class="select">
+        <select name="status" id="status" required>
+          <option value="false">Sin vender</option>
+          {% for user in users %}
+          <option value="{{ user.id }}">Vendido a {{ user.name }} - {{ user.email }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      </div>
 
-  <button type="submit">Actualizar</button>
-
-</form>
+      <button type="submit">Actualizar</button>
+    </form>
+  </div>
+</div>
 
 {% endblock %}

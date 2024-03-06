@@ -1,65 +1,85 @@
-{%extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
+{% load static %}
 
+{% block content %}
 
-{%load static%}
+<div class="container" style="margin-top: 200px;">
+  <div class="card">
+    <a href="/view_admin/" class="button">Volver al Panel</a>
 
+    <h1>Crear Empleado</h1>
 
+    <form action="" method="post">
+      {% csrf_token %}
 
-{%block content%}
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input type="text" name="name" id="name" required>
+      </div>
 
-<!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
-<a href="/view_admin/">Volver al Panel</a>
+      <div class="form-group">
+        <label for="lastname">Apellido:</label>
+        <input type="text" id="lastname" name="lastname" required>
+      </div>
 
+      <div class="form-group">
+        <label for="age">Edad:</label>
+        <input type="number" id="age" min="18" name="age" required>
+      </div>
 
-<h1>Crear Empleado</h1>
+      <div class="form-group">
+        <label for="gender">Género:</label>
+        <div class="select">
+          <select name="gender" id="gender" required>
+            <option value="">Seleccionar</option>
+            <option value="M">Masculino</option>
+            <option value="F">Femenino</option>
+          </select>
+        </div>
+      </div>
 
-<form action="" method="post">
-  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
+      <div class="form-group">
+        <label for="email">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
 
-  <label for="name">Name:</label>
-  <input type="text" id="name" name="name" required>
+      <div class="form-group">
+        <label for="charge">Cargo:</label>
+        <div class="select">
+        <select name="charge" id="charge" required>
+          <option value="">Seleccionar</option>
+          <option value="vigilant">Vigilante</option>
+          <option value="gardener">Jardinero</option>
+          <option value="concierge">Conserje</option>
+        </select>
+      </div>
+      </div>
 
-  <label for="lastname">Lastname:</label>
-  <input type="text" id="name" name="lastname" required>
+      <div class="form-group">
+        <label for="salary">Salario:</label>
+        <input type="number" id="salary" min="10" name="salary" required>
+      </div>
 
-  <label for="age">Age:</label>
-  <input type="number" id="name" min="18" name="age" required>
+      <div class="form-group">
+        <label for="phone">Teléfono:</label>
+        <input type="text" id="phone" name="phone" pattern="[0-9]{11,}" maxlength="11" minlength="11" required>
+      </div>
 
-  <label for="gender">Gender:</label>
-  <select name="gender" id="" required>
-    <option value="">Select</option>
-    <option value="M">Male</option>
-    <option value="F">Female</option>
-  </select>
+      <div class="form-group">
+        <label for="condominio">Seleccionar el Condominio que le pertenece:</label>
+        <div class="select">
+        <select name="condominio" id="condominio" required>
+          <option value="">Seleccionar</option>
+          {% for condominio in condominios %}
+          <option value="{{ condominio.id }}">{{ condominio.name }} - {{ condominio.address }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      </div>
 
-  <label for="email">Correo Electrónico:</label>
-  <input type="email" id="email" name="email" required>
+      <button type="submit">Registrar</button>
+    </form>
+  </div>
+</div>
 
-  <label for="charge">Charge:</label>
-  <select name="charge" id="" required>
-    <option value="">Select</option>
-    <option value="vigilant">vigilant</option>
-    <option value="gardener">gardener</option>
-    <option value="concierge">concierge</option>
-  </select>
-
-  <label for="salary">Salary:</label>
-  <input type="number" id="name" min="10" name="salary" required>
-
-
-  <label for="phone">Phone:</label>
-  <input type="text" id="phone" name="phone" pattern="[0-9]{11,}" maxlength="11" minlength="11" required>
-
-
-  <label for="condominio">Seleccionar el Condominio que le pertenece:</label>
-  <select name="condominio" id="condominio" required>
-    <option value="">Select</option>
-    {% for condominio in condominios %}
-    <option value="{{ condominio.id }}">{{ condominio.name }} - {{ condominio.address }}</option>
-    {% endfor %}
-  </select>
-
-  <button type="submit">Registrar</button>
-</form>
-
-{%endblock%}
+{% endblock %}

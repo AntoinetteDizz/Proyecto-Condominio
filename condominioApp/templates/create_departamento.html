@@ -3,38 +3,42 @@
 
 {% block content %}
 
-<!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
-<a href="/view_admin/">Volver al Panel</a>
+<div class="container" style="margin-top: 20px;">
+  <div class="card">
+    <a href="/view_admin/" class="button">Volver al Panel</a>
 
-<h1>Crear Departamentos</h1>
+    <h2>Crear Departamentos</h2>
 
+    <form action="" method="post">
+      {% csrf_token %}
 
-<!-- hay que crear una card que estructure el formulario -->
+      <div class="form-group">
+        <label for="edificio">Seleccionar el edificio que le pertenece:</label>
+        <div class="select">
+        <select name="edificio" id="edificio" required>
+          <option value="">Seleccionar</option>
+          {% for edificio in edificios %}
+          <option value="{{ edificio.id }}">{{ edificio.bloque }} - {{ edificio.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      </div>
 
-<form action="" method="post">
+      <div class="form-group">
+        <label for="nro_dpto">Numero de departamento:</label>
+        <input type="text" name="nro_dpto" id="nro_dpto" required>
+      </div>
 
-  {% csrf_token %}
+      <div class="form-group">
+        <label for="telefono_casa">Teléfono de casa:</label>
+        <input type="text" id="telefono_casa" name="telefono_casa" required>
+      </div>
 
+      <input type="hidden" name="status" value="False">
 
-  <label for="edificio">Seleccionar el edificio que le pertenece:</label>
-  <select name="edificio" id="edificio" required>
-    <option value="">Select</option>
-    {% for edificio in edificios %}
-    <option value="{{ edificio.id }}">{{ edificio.bloque }} - {{ edificio. }}</option>
-    {% endfor %}
-  </select>
-
-
-  <label for="">Numero de departamento</label>
-  <input type="text" name="nro_dpto" id="" required>
-
-  <label for="">Teléfono de casa</label>
-  <input type="text" id="" name="telefono_casa" required>
-
-  <input type="hidden" name="status" value="False">
-  
-  <button type="submit">Crear</button>
-
-</form>
+      <button type="submit">Crear</button>
+    </form>
+  </div>
+</div>
 
 {% endblock %}

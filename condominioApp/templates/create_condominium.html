@@ -1,38 +1,42 @@
 {% extends 'layouts/base.html'%}
 {% load static %}
 
-
-{%block content%}
-
-
-<!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
-<a href="/view_admin/">Volver al Panel</a>
-
-<h1>Crear Condominio</h1>
+{% block content %}
 
 
-<!-- hay que crear una card que estructure el formulario -->
+<div class="container"style="margin-top: 20px;">
+  <div class="card">
+    <a href="/view_admin/" class="button">Volver al Panel</a>
 
-<form action="" method="post">
+    <h1>Crear Condominio</h1>
 
-  {% csrf_token %}
+    <form action="" method="post">
+      {% csrf_token %}
 
-  <label for="">Name</label>
-  <input type="text" name="name" id="" required>
+      <div class="form-group">
+        <label for="name">Nombre</label>
+        <input type="text" name="name" id="name" required>
+      </div>
 
-  <label for="">address</label>
-  <input type="text" id="" name="address" pattern="[A-Za-z0-9\s]{1,50}"
-    title="La dirección debe contener caracteres alfanuméricos y espacios, con un máximo de 50 caracteres." required>
+      <div class="form-group">
+        <label for="address">Dirección</label>
+        <input type="text" id="address" name="address" pattern="[A-Za-z0-9\s]{1,50}"
+          title="La dirección debe contener caracteres alfanuméricos y espacios, con un máximo de 50 caracteres." required>
+      </div>
 
-  <label for="">City</label>
-  <input type="text" name="city" id="" required>
-  
-  <label for="">Year of construction </label>
-  <input type="date" name="year" id="" required>
+      <div class="form-group">
+        <label for="city">Ciudad</label>
+        <input type="text" name="city" id="city" required>
+      </div>
 
-  <button type="submit">Crear</button>
+      <div class="form-group">
+        <label for="year">Año de construcción</label>
+        <input type="date" name="year" id="year" required>
+      </div>
 
-</form>
+      <button type="submit">Crear</button>
+    </form>
+  </div>
+</div>
 
-
-{%endblock%}
+{% endblock %}

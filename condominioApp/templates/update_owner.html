@@ -1,42 +1,59 @@
-{% extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
 {% load static %}
 
-{%block content%}
-<!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
-<a href="/view_admin/">Volver al Panel</a>
+{% block content %}
 
+<div class="container" style="margin-top: 20px;">
+  <div class="card">
+    <a href="/view_admin/" class="button">Volver al Panel</a>
 
-<h2>Modificar de Usuario</h2>
+    <h2>Modificar Usuario</h2>
 
-<form action="" method="post">
-    
-  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
+    <form action="" method="post">
+      {% csrf_token %}
 
-  <label for="Usuario">Seleccionar el usuario a Modificar:</label>
-  <select name="usuario" id="usuario">
-    {% for usuario in usuarios %}
-    <option value="{{ usuario.id }}">{{ usuario.name }} - {{ usuario.email }}</option>
-    {% endfor %}
-  </select>
+      <div class="form-group">
+        <label for="usuario">Seleccionar el usuario a modificar:</label>
+        <div class="select">
+        <select name="usuario" id="usuario" required>
+          <option value="">Seleccionar</option>
+          {% for usuario in usuarios %}
+          <option value="{{ usuario.id }}">{{ usuario.name }} - {{ usuario.email }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      </div>
 
-  <label for="nombre">Nombre:</label>
-  <input type="text" id="name" name="name" required>
+      <div class="form-group">
+        <label for="name">Nombre:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
 
-  <label for="correo">Correo Electrónico:</label>
-  <input type="email" id="email" name="email" required>
+      <div class="form-group">
+        <label for="correo">Correo Electrónico:</label>
+        <input type="email" id="email" name="email" required>
+      </div>
 
-  <label for="contrasena">Contraseña:</label>
-  <input type="password" id="contrasena" name="password" required>
+      <div class="form-group">
+        <label for="contrasena">Contraseña:</label>
+        <input type="password" id="contrasena" name="password" required>
+      </div>
 
-  <label for="condominio">Seleccionar el Condominio que le pertenece:</label>
-  <select name="condominio" id="condominio">
-    {% for condominio in condominios %}
-    <option value="{{ condominio.id }}">{{ condominio.name }} - {{ condominio.address }}</option>
-    {% endfor %}
-  </select>
+      <div class="form-group">
+        <label for="condominio">Seleccionar el Condominio que le pertenece:</label>
+        <div class="select">
+          <select name="condominio" id="condominio" required>
+            <option value="">Seleccionar</option>
+            {% for condominio in condominios %}
+            <option value="{{ condominio.id }}">{{ condominio.name }} - {{ condominio.address }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
 
-  <button type="submit">Modificar</button>
-</form>
+      <button type="submit">Modificar</button>
+    </form>
+  </div>
+</div>
 
-
-{%endblock%}
+{% endblock %}
