@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
+<a href="/view_admin/">Volver al Panel</a>
+
+<h1>Crear Departamentos</h1>
+
+
+<!-- hay que crear una card que estructure el formulario -->
+
+<form action="" method="post">
+
+  {% csrf_token %}
+
+
+  <label for="edificio">Seleccionar el edificio que le pertenece:</label>
+  <select name="edificio" id="edificio" required>
+    <option value="">Select</option>
+    {% for edificio in edificios %}
+    <option value="{{ edificio.id }}">{{ edificio.bloque }} - {{ edificio. }}</option>
+    {% endfor %}
+  </select>
+
+
+  <label for="">Numero de departamento</label>
+  <input type="text" name="nro_dpto" id="" required>
+
+  <label for="">Teléfono de casa</label>
+  <input type="text" id="" name="telefono_casa" required>
+
+  <input type="hidden" name="status" value="False">
+  
+  <button type="submit">Crear</button>
+
+</form>
+
+{% endblock %}

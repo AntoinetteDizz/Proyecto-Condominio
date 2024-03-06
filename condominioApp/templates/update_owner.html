@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+
+{%block content%}
+<!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
+<a href="/view_admin/">Volver al Panel</a>
+
+
+<h2>Modificar de Usuario</h2>
+
+<form action="" method="post">
+    
+  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
+
+  <label for="Usuario">Seleccionar el usuario a Modificar:</label>
+  <select name="usuario" id="usuario">
+    {% for usuario in usuarios %}
+    <option value="{{ usuario.id }}">{{ usuario.name }} - {{ usuario.email }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="nombre">Nombre:</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="correo">Correo Electrónico:</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="contrasena">Contraseña:</label>
+  <input type="password" id="contrasena" name="password" required>
+
+  <label for="condominio">Seleccionar el Condominio que le pertenece:</label>
+  <select name="condominio" id="condominio">
+    {% for condominio in condominios %}
+    <option value="{{ condominio.id }}">{{ condominio.name }} - {{ condominio.address }}</option>
+    {% endfor %}
+  </select>
+
+  <button type="submit">Modificar</button>
+</form>
+
+
+{%endblock%}

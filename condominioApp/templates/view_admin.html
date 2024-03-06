@@ -1,0 +1,55 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+
+
+{%block content%}
+
+<!-- aqui va la nav del admin -->
+
+<header>
+    <a href="" class="logo">
+        <img src="{% static 'img/view_admin.png' %}" alt="Imagen Administrador">
+        <h2 class="nombre-pag">USUARIO ADMINISTRADOR</h2>
+    </a>
+    <nav>
+        <div class="dropdown">
+            <button class="dropbtn">Empleados</button>
+            <div class="dropdown-content">
+                <a href="{% url 'read_employee'%}">Ver Empleados</a>
+                <a href="{% url 'create_employee'%}">Crear Empleado</a>
+                <a href="{% url 'update_employee'%}">Modificar Empleado</a>
+                <a href="{% url 'delete_employee'%}">Eliminar Empleado</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn">Condominios</button>
+            <div class="dropdown-content">
+                <a href="{% url 'read_condominium'%}">Ver Condominios</a>
+                <a href="{% url 'create_condominium'%}">Crear Condominios</a>
+                <a href="{% url 'update_condominium'%}">Modificar Condominios</a>
+                <a href="{% url 'delete_condominium'%}">Eliminar Condominios</a>
+            </div>
+        </div>
+        <div class="dropdown" style="margin-right: 5px;">
+            <button class="dropbtn">Propietarios</button>
+            <div class="dropdown-content">
+                <a href="{% url 'read_owner'%}">Ver Propietarios</a>
+                <a href="{% url 'create_owner'%}">Crear Propietarios</a>
+                <a href="{% url 'update_owner'%}">Modificar Propietarios</a>
+                <a href="{% url 'delete_owner'%}">Eliminar Propietarios</a>
+            </div>
+        </div>
+        <a href="/" class="nav-link" style="float: right;">Cerrar Sesión</a>
+    </nav>
+</header>
+<h1>Hola Administrador</h1>
+
+
+<!--  -->
+
+
+
+
+
+
+{%endblock%}

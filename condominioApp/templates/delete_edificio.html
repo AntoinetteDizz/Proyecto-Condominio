@@ -1,0 +1,23 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+
+{% block content %}
+
+<!-- Enlace para volver al panel -->
+<a href="/view_admin/">Volver al Panel</a>
+
+<h2>Eliminar edificio</h2>
+
+<form action="" method="post">
+    
+  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
+
+  <label for="edificio">Seleccionar el usuario a modificar:</label>
+  <select name="edificio" id="edificio">
+    {% for edificio in edificios %}
+      <option value="{{ edificio.id }}">{{ edificio.id }} - {{ edificio.condominio.name }} {{ edificio.bloque }}</option>
+    {% endfor %}
+  </select>
+  <button type="submit">Eliminar</button>
+  
+{%endblock%}

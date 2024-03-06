@@ -1,0 +1,38 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+
+
+{%block content%}
+
+
+<!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
+<a href="/view_admin/">Volver al Panel</a>
+
+<h1>Crear Condominio</h1>
+
+
+<!-- hay que crear una card que estructure el formulario -->
+
+<form action="" method="post">
+
+  {% csrf_token %}
+
+  <label for="">Name</label>
+  <input type="text" name="name" id="" required>
+
+  <label for="">address</label>
+  <input type="text" id="" name="address" pattern="[A-Za-z0-9\s]{1,50}"
+    title="La dirección debe contener caracteres alfanuméricos y espacios, con un máximo de 50 caracteres." required>
+
+  <label for="">City</label>
+  <input type="text" name="city" id="" required>
+  
+  <label for="">Year of construction </label>
+  <input type="date" name="year" id="" required>
+
+  <button type="submit">Crear</button>
+
+</form>
+
+
+{%endblock%}

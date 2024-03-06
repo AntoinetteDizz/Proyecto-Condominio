@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html'%}
+{% load static %}
+
+{% block content %}
+
+<!-- Enlace para volver al panel -->
+<a href="/view_admin/">Volver al Panel</a>
+
+<h2>Actualizar Departamento</h2>
+
+<form action="" method="post">
+    
+  {% csrf_token %} <!-- Agregar el token CSRF aquí -->
+
+  <label for="departamento">Seleccionar el Departamento a actualizar:</label>
+  <select name="departamento" id="departamento">
+    {% for departamento in departamentos %}
+      <option value="{{ departamento.id }}">ID:{{ departamento.id }} - Nro:{{ departamento.nro_dpto }} - Bloque:{{ departamento.edificios.bloque }}</option>
+    {% endfor %}
+  </select>
+
+  <label for="nro_dpto">Número de departamento:</label>
+  <input type="text" id="nro_dpto" name="nro_dpto" required>
+
+  <label for="telefono_casa">Teléfono de casa:</label>
+  <input type="text" id="telefono_casa" name="telefono_casa" required>
+
+  <label for="status">Status del departamento</label>
+  <select name="status" id="status">
+    <option value="false">Sin vender</option>
+    {% for user in users %}
+      <option value="{{ user.id }}">Vendido a {{ user.name }} - {{ user.email }}</option>
+    {% endfor %}
+  </select>
+
+  <button type="submit">Actualizar</button>
+
+</form>
+
+{% endblock %}
