@@ -39,18 +39,6 @@
         <input type="password" id="contrasena" name="password" required>
       </div>
 
-      <div class="form-group">
-        <label for="condominio">Seleccionar el Condominio que le pertenece:</label>
-        <div class="select">
-          <select name="condominio" id="condominio" required>
-            <option value="">Seleccionar</option>
-            {% for condominio in condominios %}
-            <option value="{{ condominio.id }}">{{ condominio.name }} - {{ condominio.address }}</option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-
       <button type="submit">Modificar</button>
     </form>
   </div>
