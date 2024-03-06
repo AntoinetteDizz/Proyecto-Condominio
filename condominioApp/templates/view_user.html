@@ -11,27 +11,59 @@
         <p>Tu nombre de usuario es: {{ request.session.user.name }}</p>
         <p>Tu correo electrónico es: {{ request.session.user.email }}</p>
     {% endif %}
+    
+    {% if user_info %}
         <h1>Bienvenido, {{ user_info.name }}</h1>
         <h2>Tus departamentos:</h2>
         {% if departamentos_usuario %}
-            <!-- El objeto departamentos no está vacío, puedes mostrar su contenido -->
-            <ul>
+            <table border="1">
+                <tr>
+                    <th>Condominio</th>
+                    <th>Edificio</th>
+                    <th>Número de departamento</th>
+                </tr>
                 {% for departamento in departamentos_usuario %}
-                    <b>Departamento: </b>
-                    <li>Condominio: {{ departamento.departamento.edificios.condominio.name }}</li>
-                    <li>Edificio: {{ departamento.departamento.edificios.bloque }}</li>
-                    <li>Nro departamento: {{ departamento.departamento.nro_dpto }}</li>
+                    <tr>
+                        <td>{{ departamento.departamento.edificios.condominio.name }}</td>
+                        <td>{{ departamento.departamento.edificios.bloque }}</td>
+                        <td>{{ departamento.departamento.nro_dpto }}</td>
+                    </tr>
                 {% endfor %}
-            </ul>   
+            </table>
         {% else %}
-            <!-- El objeto departamentos está vacío, muestra un mensaje o realiza alguna acción alternativa -->
             <p>No hay departamentos disponibles.</p>
         {% endif %}
+    {% endif %}
+    
+    <h2>Pagos realizados:</h2>
+    {% for pago in pagos_condominio %}
+        <b>Pagos realizados para el condominio {{ pago.condominio.name }}:</b>
+        {% if pago.pagos %}
+            <table border="1">
+                <tr>
+                    <th>Monto</th>
+                    <th>Descripción</th>
+                </tr>
+                {% for pago_condominio in pago.pagos %}
+                    <tr>
+                        <td>{{ pago_condominio.monto_pago }}</td>
+                        <td>{% if pago_condominio.descripcion %}{{ pago_condominio.descripcion }}{% else %}(sin descripción){% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No se encontraron pagos realizados.</p>
+        {% endif %}
+    {% endfor %}
+
+    <form action="{% url 'pago_mantenimiento' %}" method="GET">
+        <button type="submit">Pagar Mantenimiento de Condominios</button>
+    </form>
 {% else %}
-    <!-- Mostrar un mensaje de error si no se encuentra la sesión -->
-    <h1>Error: No se encontró la sesión del usuario, Login: <a href="/" >Login</a></h1>
+    <h1>Error: No se encontró la sesión del usuario, <a href="/">Login</a></h1>
 {% endif %}
 
 {% endblock %}
+
 
 
