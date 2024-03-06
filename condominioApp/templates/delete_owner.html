@@ -1,34 +1,32 @@
-{% extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
 {% load static %}
-
-
-
 
 {% block content %}
 
-<h1>Eliminar Propietario</h1>
+<div class="container" style="margin-top: 20px;">
+  <div class="card">
+    <a href="/view_admin/" class="button">Volver al Panel</a>
 
+    <h2>Eliminar Propietario</h2>
 
+    <form action="" method="post">
+      {% csrf_token %}
 
+      <div class="form-group">
+        <label for="user">Seleccionar el propietario a eliminar:</label>
+        <div class="select">
+        <select name="user" id="user" required>
+          <option value="">Seleccionar</option>
+          {% for user in usuarios %}
+          <option value="{{ user.id }}">{{ user.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      </div>
 
-<form action="" method="post">
+      <button type="submit">Eliminar</button>
+    </form>
+  </div>
+</div>
 
-  {% csrf_token %}
-
-  <label for="user">Seleccione el propietario a eliminar</label>
-  <select name="user" id="" required>
-    <option value="">Select</option>
-    {% for user in usuarios %}
-    <option value="{{user.id}}">{{ user.name }}</option>
-    {% endfor %}
-  </select>
-
-  <button type="submit">Eliminar</button>
-
-
-
-</form>
-
-
-
-{%endblock%}
+{% endblock %}
