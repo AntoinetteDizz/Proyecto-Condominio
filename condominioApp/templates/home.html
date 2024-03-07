@@ -1,0 +1,161 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>HabitatFlow</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="{% static '/styles/style4.css'%}">
+</head>
+
+<body>
+
+	<!-- Cabecera principal -->
+	<header class="header">
+		
+		<!-- Menú -->
+		<div class="menu container">
+
+			<!-- Enlace simulacro para el logo -->
+			<a href="/" class="logo">HabitatFlow</a>
+
+			<input type="checkbox" id="menu"/>
+
+			<!-- Navegación -->
+			<nav class="navbar">
+
+				<!-- Lista de enlaces -->
+				<ul>
+					<li><a href="{% url 'login'%}">Login</a></li>
+				</ul>
+
+			</nav>
+		</div>
+
+		<!-- Contenido de Cabecera -->
+		<div class="header-content container">
+
+			<!-- Titulo -->
+			<div class="header-txt">
+				<h1>El software de compra, venta y gestión de condomios</h1>
+				<p>
+					¡Haz realidad tus proyectos inmobiliarios de forma fácil y eficiente!
+				</p>
+
+			</div>
+
+			<!-- Imagen de referencia -->
+			<div class="header-img">
+				<img src="{% static 'img/Casas.jpg' %}" alt="casas">
+			</div>
+		</div>
+	</header>
+
+	<!-- Sección about -->
+	<section class="about container">
+
+		<!-- Imagen de referencia -->
+		<div class="about-img">
+			<img src="{% static 'img/Enfoque.jpg' %}" alt="casa con llaves">
+		</div>
+
+		<!-- Información acerca de la empresa -->
+		<div class="about-txt">
+			
+			<h2>Nuestro Enfoque</h2>
+			<p>
+				Nos dedicamos a simplificar y facilitar la compra, venta y gestión de condominios. Ofrecemos soluciones integrales para atraer y gestionar propiedades de manera efectiva en una plataforma única.
+			</p>
+		</div>
+	</section>
+
+	<section class="about container">
+
+		<!-- Imagen de referencia -->
+		<div class="about-img">
+			<img src="{% static 'img/Mision.jpg' %}" alt="chica en computadora">
+		</div>
+
+		<!-- Información acerca de la empresa -->
+		<div class="about-txt">
+			
+			<h2>Misión</h2>
+			<p>
+				Proporcionar a nuestros clientes las herramientas necesarias para llevar a cabo transacciones inmobiliarias de manera eficiente y segura, brindando un servicio de alta calidad que satisfaga sus necesidades y expectativas.
+			</p>
+		</div>
+	</section>
+
+	<section class="about container">
+
+		<!-- Imagen de referencia -->
+		<div class="about-img">
+			<img src="{% static 'img/Vision.jpg' %}" alt="personas en mesa">
+		</div>
+
+		<!-- Información acerca de la empresa -->
+		<div class="about-txt">
+			
+			<h2>Visión</h2>
+			<p>
+				Ser líderes en el mercado inmobiliario, ofreciendo un servicio innovador y de excelencia que nos permita expandirnos y crecer de manera sostenida, manteniendo siempre nuestro compromiso con la calidad y la satisfacción del cliente.
+			</p>
+		</div>
+	</section>
+
+
+
+	<!-- Main de Servicios -->
+	<main class="servicios">
+
+		<h2>Servicios</h2>
+
+		<div class="servicios-content container">
+
+			<div class="servicio-1">
+				<i class="fa-solid fa-city"></i>
+				<h3>Gestión de Condominios</h3>
+			</div>
+
+			<div class="servicio-1">
+				<i class="fa-solid fa-house"></i>
+				<h3>Gestión de Viviendas</h3>
+			</div>
+
+			<div class="servicio-1">
+				<i class="fa-solid fa-money-bill"></i>
+				<h3>Reporte de Pagos</h3>
+			</div>
+
+			<div class="servicio-1">
+				<i class="fa-solid fa-person-circle-check"></i>
+				<h3>Atención Centralizada</h3>
+			</div>
+
+		</div>
+	</main>
+
+	<!-- Pie de página -->
+	<footer class="footer">
+		
+		<div class="footer-content container">
+
+			<div class="link">
+				<a href="/" class="logo">HabitatFlow</a>
+			</div>
+		</div>
+	</footer>
+
+	<script>
+		function myFunction(){
+			window.location.href="http://localhost/pagina"
+		}
+	</script>
+
+</body>
+
+</html>

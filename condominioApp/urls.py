@@ -4,7 +4,10 @@ from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-  path('', views.index),
+    
+  path('',views.home),
+  path('login', views.index,name='login'),
+
   path('view_admin/', views.admin),
 
   #URL PARA EL CRUD DE CONDOMIOS ===========================================================

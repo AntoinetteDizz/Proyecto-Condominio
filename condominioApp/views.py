@@ -2,6 +2,11 @@ from django.utils import timezone
 from django.shortcuts import render,redirect,get_object_or_404
 from .models  import *
 # Create your views here.
+#Vista de la pagina Principal
+
+def home(request):
+  return render(request,'home.html')
+
 
 # Vista del login
 def index(request):
