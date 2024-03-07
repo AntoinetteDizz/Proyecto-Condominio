@@ -1,12 +1,8 @@
-{% extends 'layouts/base.html'%}
+{% extends 'layouts/base.html' %}
 {% load static %}
 
-
-{%block content%}
-
- <!-- CREAR LA PANTILLA DE LA TABLA -->
-
- <!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
+{% block content %}
+<!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="ml-2 breadcrumb-item"><a class="ml-4 breadcrumb-item" href="/view_admin/">Home</a></li>
@@ -14,24 +10,39 @@
     </ol>
 </nav> 
     
-<div class="mt-3 md-3 ml-5 mr-5 d-flex justify-content-center">
-    <table class="table">
-        <thead class="thead-light">
-            <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for usuario in usuarios %}
-            <tr>
-                <td>{{ usuario.name }}</td>
-                <td>{{ usuario.email }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
-{%endblock%}
+{% for usuario in usuarios %}
+    <!-- Obtener departamentos del usuario -->
+    {% for departamento_user in usuario.departamento_user_set.all %}
+        <div class="mt-3 md-3 ml-5 mr-5 d-flex justify-content-center">
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th scope="col" class="w-25">Nombre</th>
+                        <th scope="col" class="w-25">Email</th>
+                        <th scope="col" class="w-25">Departamento</th>
+                        <th scope="col" class="w-25">Edificio</th>
+                        <th scope="col" class="w-25">Condominio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ usuario.name }}</td>
+                        <td>{{ usuario.email }}</td>
+                        <td>{{ departamento_user.departamento.nro_dpto }}</td>
+                        <td>{{ departamento_user.departamento.edificios.bloque }}</td>
+                        <td>{{ departamento_user.departamento.edificios.condominio.name }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    {% empty %}
+        <p class="ml-5">No hay departamentos asignados a este propietario.</p>
+    {% endfor %}
+{% empty %}
+    <p class="ml-5">No hay propietarios registrados.</p>
+{% endfor %}
+
+{% endblock %}
+
 
 
