@@ -18,7 +18,7 @@
         <select name="edificio" id="edificio" required>
           <option value="">Seleccionar</option>
           {% for edificio in edificios %}
-          <option value="{{ edificio.id }}">{{ edificio.bloque }} - {{ edificio.name }}</option>
+          <option value="{{ edificio.id }}">{{ edificio.bloque }} - {{ edificio.condominio.name }}</option>
           {% endfor %}
         </select>
       </div>
