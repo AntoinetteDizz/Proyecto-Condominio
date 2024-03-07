@@ -9,35 +9,37 @@
     <h2>Procesar Pagos de Mantenimiento</h2>
 
     {% if session_present %}
-      <form method="POST">
-        {% csrf_token %}
+      {% if departamentos_usuario %}
+        <form method="POST">
+          {% csrf_token %}
 
-        <div class="form-group">
-          <label for="condominio">Seleccionar condominio:</label>
-          <div class="select"> <select name="condominio" id="condominio" required>
-              {% for departamento in departamentos_usuario %}
-                <option value="{{ departamento.departamento.edificios.condominio.id }}">{{ departamento.departamento.edificios.condominio.name }}</option>
-              {% endfor %}
-            </select>
+          <div class="form-group">
+            <label for="condominio">Seleccionar condominio:</label>
+            <div class="select">
+              <select name="condominio" id="condominio" required>
+                {% for departamento in departamentos_usuario %}
+                  <option value="{{ departamento.departamento.edificios.condominio.id }}">{{ departamento.departamento.edificios.condominio.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="monto">Monto de pago:</label>
-          <input type="number" name="monto" id="monto" step="0.01" required>
-        </div>
+          <div class="form-group">
+            <label for="monto">Monto de pago:</label>
+            <input type="number" name="monto" id="monto" step="0.01" required>
+          </div>
 
-        <div class="form-group">
-          
           <div class="form-group">
             <label for="descripcion">Descripción (opcional):</label>
             <br>
             <textarea name="descripcion" id="descripcion" rows="4" cols="50" style="border: 1px solid #ccc; background-color: #fff; font-size: 16px; line-height: 1.5; padding: 10px; margin: 10px; border-radius: 5px; box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);"></textarea>
           </div>
-        </div>
 
-        <button type="submit">Procesar Pago</button>
-      </form>
+          <button type="submit">Procesar Pago</button>
+        </form>
+      {% else %}
+        <p>No hay condominios disponibles para procesar pagos.</p>
+      {% endif %}
     {% else %}
       <p>No se ha iniciado sesión.</p>
     {% endif %}
