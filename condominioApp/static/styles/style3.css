@@ -412,3 +412,15 @@ body {
   background-color: #e9f2fd;
   padding: 1rem;
 }
+
+textarea {
+  width: 95%;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  font-size: 16px;
+  line-height: 1.5;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
