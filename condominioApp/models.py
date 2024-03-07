@@ -114,7 +114,7 @@ class Mantenimiento(models.Model):
   descripcion = models.TextField(blank=True)
 
   def __str__(self):
-      return f"[id]: {self.pk} --- [condominio]:{self.condominio.name} ---  [users]:{self.users.name} --- [descripcion]:{self.descripcion}"
+      return f"[id]: {self.pk} --- [condominio]:{self.condominio.name} ---  [users]:{self.usuario.name} --- [descripcion]:{self.descripcion}"
 
   class Meta:
       db_table = 'Mantenimiento'

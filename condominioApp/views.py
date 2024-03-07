@@ -124,9 +124,9 @@ def read_owner(request):
 def create_owner(request):
     
     if request.method == 'GET':
-        condominios = Condominio.objects.all()
-        context = {'condominios': condominios}
-        return render(request, 'create_owner.html', context)
+        #condominios = Condominio.objects.all()
+        #context = {'condominios': condominios}
+        return render(request, 'create_owner.html')
     else:
         name = request.POST['name']
         email = request.POST['email']
