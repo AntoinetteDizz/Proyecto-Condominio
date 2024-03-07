@@ -4,52 +4,88 @@
 
 {%block content%}
 
-<!-- aqui va la nav del admin -->
+    <style>
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+            color: white;
+            text-align: center;
+        }
 
-<header>
-    <a href="" class="logo">
-        <img src="{% static 'img/view_admin.png' %}" alt="Imagen Administrador">
-        <h2 class="nombre-pag">USUARIO ADMINISTRADOR</h2>
-    </a>
-    <nav>
-        <div class="dropdown">
-            <button class="dropbtn">Empleados</button>
-            <div class="dropdown-content">
-                <a href="{% url 'read_employee'%}">Ver Empleados</a>
-                <a href="{% url 'create_employee'%}">Crear Empleado</a>
-                <a href="{% url 'update_employee'%}">Modificar Empleado</a>
-                <a href="{% url 'delete_employee'%}">Eliminar Empleado</a>
+        header {
+            position: relative;
+            z-index: 2;
+        }
+        
+        main {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+
+    <!-- aqui va la nav del admin -->
+
+    <header class= "bg-light">
+        <a href="" class="logo bg-white">
+            <img src="{% static 'img/view_admin.png' %}" alt="Imagen Administrador">
+            <h2 class="nombre-pag">USUARIO ADMINISTRADOR</h2>
+        </a>
+        <nav>
+            <div class="dropdown">
+                <button class="dropbtn">Empleados</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'read_employee'%}">Ver Empleados</a>
+                    <a href="{% url 'create_employee'%}">Crear Empleado</a>
+                    <a href="{% url 'update_employee'%}">Modificar Empleado</a>
+                    <a href="{% url 'delete_employee'%}">Eliminar Empleado</a>
+                </div>
             </div>
-        </div>
-        <div class="dropdown">
-            <button class="dropbtn">Condominios</button>
-            <div class="dropdown-content">
-                <a href="{% url 'read_condominium'%}">Ver Condominios</a>
-                <a href="{% url 'create_condominium'%}">Crear Condominios</a>
-                <a href="{% url 'update_condominium'%}">Modificar Condominios</a>
-                <a href="{% url 'delete_condominium'%}">Eliminar Condominios</a>
+            <div class="dropdown">
+                <button class="dropbtn">Condominios</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'read_condominium'%}">Ver Condominios</a>
+                    <a href="{% url 'create_condominium'%}">Crear Condominios</a>
+                    <a href="{% url 'update_condominium'%}">Modificar Condominios</a>
+                    <a href="{% url 'delete_condominium'%}">Eliminar Condominios</a>
+                </div>
             </div>
-        </div>
-        <div class="dropdown" style="margin-right: 5px;">
-            <button class="dropbtn">Propietarios</button>
-            <div class="dropdown-content">
-                <a href="{% url 'read_owner'%}">Ver Propietarios</a>
-                <a href="{% url 'create_owner'%}">Crear Propietarios</a>
-                <a href="{% url 'update_owner'%}">Modificar Propietarios</a>
-                <a href="{% url 'delete_owner'%}">Eliminar Propietarios</a>
+            <div class="dropdown" style="margin-right: 5px;">
+                <button class="dropbtn">Propietarios</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'read_owner'%}">Ver Propietarios</a>
+                    <a href="{% url 'create_owner'%}">Crear Propietarios</a>
+                    <a href="{% url 'update_owner'%}">Modificar Propietarios</a>
+                    <a href="{% url 'delete_owner'%}">Eliminar Propietarios</a>
+                </div>
             </div>
-        </div>
-        <a href="/" class="nav-link" style="float: right;">Cerrar Sesión</a>
-    </nav>
-</header>
-<h1>Hola Administrador</h1>
+            <a href="/" class="nav-link bg-white" style="float: right;">Cerrar Sesión</a>
+        </nav>
+    </header>
 
+    <main>
+        <div class="container text-left mt-5" style=" z-index: 1;">
+            <div class="row">
+                <!-- col 1 -->
+                <div class="col-5 mt-2 text-left">
+                    <h1 style="font-size: 3rem;  font-family: 'Arial', sans-serif;" class="text-left">Vista de Usuario Administrador</h1>
+                    <p class="mt-5">
+                        La interfaz de usuario del administrador en esta aplicación permite la gestión eficiente de empleados, condominios y propietarios. Con un diseño intuitivo y una navegación sencilla, los administradores pueden acceder a información detallada, realizar cambios y tomar decisiones informadas. La imagen ilustrativa de los modernos edificios de condominios refuerza visualmente el propósito y el contexto de la aplicación.    
+                    </p>
+                </div>
+                
+                <div  class="mr-4" style="border-left: 1px solid transparent; border-image: linear-gradient(to bottom, transparent, #000, transparent) 1;"></div>
+            
+                <!-- col 2 -->
+                <div class="col-6">
+                    <img class="rounded-3 shadow-lg w-100 h-auto" alt="condominios" >
+                </div>
+            </div>   
+    </main>
 
-<!--  -->
-
-
-
-
-
-
+    <footer class="footer">
+        <p>By. Universidad Nacional Experimental de Guayana</p>
+    </footer>
 {%endblock%}

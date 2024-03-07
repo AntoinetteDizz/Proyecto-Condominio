@@ -2,50 +2,61 @@
 {% load static %}
 
 {% block content %}
+    <header class="bg-light">
+        <a href="#" class="logo bg-light ml-4 mr-5">
+            <img src="{% static 'img/view_admin.png' %}" alt="Imagen Administrador">
+            <h2 class="nombre-pag">USUARIO ADMINISTRADOR</h2>
+        </a>
 
- <!-- CREAR LA PANTILLA DE LA TABLA -->
-
- <!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
-
-
- <header>
-    <a href="" class="logo">
-        <img src="{% static 'img/view_admin.png' %}" alt="Imagen Administrador">
-        <h2 class="nombre-pag">USUARIO ADMINISTRADOR</h2>
-    </a>
-    <nav>
-        <div class="dropdown">
-            <button class="dropbtn">Edificios</button>
-            <div class="dropdown-content">
-                <a href="{% url 'view_edificio'%}">Ver Edificios</a>
-                <a href="{% url 'create_edificio'%}">Crear Edificios</a>
-                <a href="{% url 'update_edificio'%}">Modificar Edificios</a>
-                <a href="{% url 'delete_edificio'%}">Eliminar Edificios</a>
+        <nav class="ml-4 mr-5">
+            <div class="dropdown">
+                <button class="dropbtn">Edificios</button>
+                <div class="dropdown-content">
+                    <a href="{% url 'view_edificio'%}">Ver Edificios</a>
+                    <a href="{% url 'create_edificio'%}">Crear Edificios</a>
+                    <a href="{% url 'update_edificio'%}">Modificar Edificios</a>
+                    <a href="{% url 'delete_edificio'%}">Eliminar Edificios</a>
+                </div>
             </div>
-        </div>
-        <a href="/" class="nav-link" style="float: right;">Cerrar Sesión</a>
-    </nav>
-</header>
+            <a href="/" class="nav-link bg-light" style="float: right;">Cerrar Sesión</a>
+        </nav>
+    </header>
 
- <a href="/view_admin/">Volver al Panel</a>
- 
-<table>
-    <tr>
-        <th>Nombre</th>
-        <th>Dirección</th>
-        <th>Ciudad</th>
-        <th>Año de Construcción</th>
-    </tr>
-    {% for condominio in condominios %}
-    <tr>
-        <td>{{ condominio.name }}</td>
-        <td>{{ condominio.address }}</td>
-        <td>{{ condominio.city }}</td>
-        <td>{{ condominio.year_construction }}</td>
-    </tr>
-    {% endfor %}
-</table>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="ml-2 breadcrumb-item">
+                <a class="ml-4 bg-light breadcrumb-item" href="/view_admin/">
+                    Home
+                </a>
+            </li>
 
+            <li style="font-size: 1.7rem;" class="mt-4 breadcrumb-item active" aria-current="page">
+                Ver Condominios
+            </li>
+        </ol>
+    </nav> 
 
+    <div class="mt-3 md-3 ml-5 mr-5 d-flex justify-content-center">
+        <table class="table">
+            <thead class="thead-light">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Ciudad</th>
+                    <th>Año de Construcción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for condominio in condominios %}
+                <tr>
+                    <td>{{ condominio.name }}</td>
+                    <td>{{ condominio.address }}</td>
+                    <td>{{ condominio.city }}</td>
+                    <td>{{ condominio.year_construction }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

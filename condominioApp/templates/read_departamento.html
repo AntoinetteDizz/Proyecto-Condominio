@@ -4,49 +4,60 @@
 {% block content %}
 
 <!-- CREAR LA PANTILLA DE LA TABLA -->
-<a href="/view_admin/">Volver al Panel</a>
- 
-<table>
-    <tr>
-        <th>Edificio</th>
-        <th>Número de departamento</th>
-        <th>Teléfono de casa</th>
-        <th>Status</th>
-        <th>Fecha de compra</th>
-        <th>Propietario</th>
-    </tr>
-    {% for departamento in departamentos %}
-    <tr>
-        <td>{{ departamento.edificios.bloque }}</td>
-        <td>{{ departamento.nro_dpto }}</td>
-        <td>{{ departamento.telefono_casa }}</td>
-        <td>
-            {% if departamento.status %}
-                Vendido
-            {% else %}
-                Sin vender
-            {% endif %}
-        </td>
-        <td>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="ml-2 breadcrumb-item"><a class="ml-4 breadcrumb-item" href="/view_admin/">Home</a></li>
+        <li style="font-size: 1.7rem;" class="mt-4 breadcrumb-item active" aria-current="page">Vista de Propietarios</li>
+    </ol>
+</nav> 
 
-            {% for departamento_user in departamentos_user %}
-                {% if departamento_user.departamento.id == departamento.id %}
-                    {{departamento_user.fecha_compra|date:"d/m/Y"}}
-                {% endif %}
-            {% empty %}
-                N/A
+<div class="mt-3 md-3 ml-5 mr-5 d-flex justify-content-center">
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Edificio</th>
+                <th scope="col">Número de departamento</th>
+                <th scope="col">Teléfono de casa</th>
+                <th scope="col">Status</th>
+                <th scope="col">Fecha de compra</th>
+                <th scope="col">Propietario</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for departamento in departamentos %}
+            <tr>
+                <td>{{ departamento.edificios.bloque }}</td>
+                <td>{{ departamento.nro_dpto }}</td>
+                <td>{{ departamento.telefono_casa }}</td>
+                <td>
+                    {% if departamento.status %}
+                        Vendido
+                    {% else %}
+                        Sin vender
+                    {% endif %}
+                </td>
+                <td>
+                    {% for departamento_user in departamentos_user %}
+                        {% if departamento_user.departamento.id == departamento.id %}
+                            {{departamento_user.fecha_compra|date:"d/m/Y"}}
+                        {% endif %}
+                    {% empty %}
+                        N/A
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for departamento_user in departamentos_user %}
+                        {% if departamento_user.departamento.id == departamento.id %}
+                            {{ departamento_user.users.name }}
+                        {% endif %}
+                    {% empty %}
+                        Sin vender
+                    {% endfor %}
+                </td>
+            </tr>
             {% endfor %}
-        </td>
-        <td>
-            {% for departamento_user in departamentos_user %}
-                {% if departamento_user.departamento.id == departamento.id %}
-                    {{ departamento_user.users.name }}
-                {% endif %}
-            {% empty %}
-                Sin vender
-            {% endfor %}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}

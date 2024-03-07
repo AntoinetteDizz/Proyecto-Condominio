@@ -7,23 +7,31 @@
  <!-- CREAR LA PANTILLA DE LA TABLA -->
 
  <!-- acomodar esta etiqueta 'a' para que se muestre de otra manera (css) -->
-<a href="/view_admin/">Volver al Panel</a>
- 
- <table>
-  <tr>
-      <th>Nombre</th>
-      <th>email</th>
-  </tr>
-  {% for usuario in usuarios %}
-  <tr>
-      <td>{{ usuario.name }}</td>
-      <td>{{ usuario.email }}</td>
-  
-  </tr>
-  {% endfor %}
-</table>
-
-
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="ml-2 breadcrumb-item"><a class="ml-4 breadcrumb-item" href="/view_admin/">Home</a></li>
+        <li style="font-size: 1.7rem;" class="mt-4 breadcrumb-item active" aria-current="page">Vista de Propietarios</li>
+    </ol>
+</nav> 
+    
+<div class="mt-3 md-3 ml-5 mr-5 d-flex justify-content-center">
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.name }}</td>
+                <td>{{ usuario.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {%endblock%}
 
 
