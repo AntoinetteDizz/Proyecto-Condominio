@@ -1,3 +1,5 @@
+
+
 body {
   font-family: 'Montserrat';
   background: linear-gradient(90deg, rgba(77, 67, 255, 0.15730042016806722) 0%, rgba(158, 223, 255, 1) 100%);
@@ -82,6 +84,7 @@ div.container-center {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 

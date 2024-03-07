@@ -6,32 +6,37 @@ from .models  import *
 # Vista del login
 def index(request):
     if request.method == 'GET':
+
+        if 'user' in request.session:
+            del request.session['user']
+
+        if 'user_type' in request.session:
+            del request.session['user_type']
+
         return render(request, 'login.html')
     else:
         email = request.POST['email']
         password = request.POST['contrasena']
-        
+
         admins = Directivo.objects.filter(email=email, password=password)
         users = Users.objects.filter(email=email, password=password)
 
-        # Acceso a la vista del usuario admin
+
         for admin in admins:
             if admin.acess.access == "Administrador":
-                request.session['user_type'] = 'admin'  # Guardar el tipo de usuario en la sesión
+                request.session['user_type'] = 'admin'
                 return redirect('view_admin/')
-        
-        # Acceso a la vista del usuario común
+
         for user in users:
           if user.acess.access == "Propietario":
               request.session['user'] = {
                   'id': user.id,
                   'name': user.name,
                   'email': user.email,
-                  # Agrega cualquier otro atributo que desees incluir en la sesión
               }
-          request.session['user_type'] = 'user'  # Guardar el tipo de usuario en la sesión
+          request.session['user_type'] = 'user'
           return redirect('view_user/')
-        return render(request, 'login.html', {'error_message': 'Credenciales inválidas'})  # Pasar un mensaje de error a la vista
+        return render(request, 'login.html', {'error_message': 'Credenciales inválidas'})
 
   
 # vista del admin

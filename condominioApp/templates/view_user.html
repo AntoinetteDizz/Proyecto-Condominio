@@ -4,7 +4,15 @@
 {% block content %}
 
 {% if session_present %}
+
+
     <h1 class="bg-light">Bienvenido</h1>
+
+    <a href="/" class="nav-link bg-white" style="float: right;">Cerrar Sesión</a>
+
+    <form action="{% url 'pago_mantenimiento' %}" method="GET">
+        <button style="width :400px ;" type="submit">Pagar Mantenimiento de Condominios</button>
+    </form>
     
     {% if user_info %}
         <h2 class="ml-5">{{ user_info.name }}</h2>
@@ -79,9 +87,6 @@
         {% endif %}
     {% endfor %}
         
-    <form action="{% url 'pago_mantenimiento' %}" method="GET">
-        <a class="ml-5 mr-5 mb-2 bg-light" type="submit">Pagar Mantenimiento de Condominios</a>
-    </form>
     {% else %}
         <h1>Error: No se encontró la sesión del usuario, <a href="/">Login</a></h1>
 {% endif %}
